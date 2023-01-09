@@ -7,10 +7,13 @@
   "scripts": {
     "tsc-check": "tsc --noEmit && tsc --noEmit --skipLibCheck",
     "dev": "nodemon -V -e ts,graphql -w ./src -x yarn run start",
-    "start": "yarn build && node lib/index.js | pino-pretty -c -l",
+    "start": "yarn build && node lib/servers/graphql-main.js | pino-pretty -c -l",
     "build": "tsc --skipLibCheck && tscpaths -p tsconfig.json -s ./src -o ./lib",
     "eslint-check": "eslint \"{src,test}/**/*.ts\"",
     "eslint-fix": "eslint \"{src,test}/**/*.ts\" --fix"
+  },
+  "engines": {
+    "node": "18"
   },
   "dependencies": {
     "apollo-server-express": "^3.11.1",

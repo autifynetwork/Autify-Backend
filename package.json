@@ -6,7 +6,9 @@
   "private": true,
   "scripts": {
     "dev": "nodemon -V -e ts,graphql -w ./src -x yarn run start",
-    "start": "ts-node src/index.ts"
+    "start": "ts-node src/index.ts",
+    "eslint-check": "eslint \"{src,test}/**/*.ts\"",
+    "eslint-fix": "eslint \"{src,test}/**/*.ts\" --fix"
   },
   "dependencies": {
     "apollo-server-express": "^3.11.1",

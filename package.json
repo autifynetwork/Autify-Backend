@@ -1,0 +1,7 @@
+{
+  "name": "Autify-Backend",
+  "version": "1.0.0",
+  "description": "Backend for Autify, a platform that provides trust in the global supply chain market using blockchain",
+  "repository": "git@github.com:autifynetwork/Autify-Backend.git",
+  "private": true
+}

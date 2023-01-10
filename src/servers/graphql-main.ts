@@ -18,7 +18,6 @@ import getSchema from '@graphql/index'
 const startServer = async () => {
     const app = express()
     const httpServer = createServer(app)
-    const port = process.env.APP_PORT || 4000
 
     app.disable('x-powered-by')
 

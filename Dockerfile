@@ -16,7 +16,7 @@ COPY --from=BUILD_IMAGE /app/lib /app/lib
 COPY --from=BUILD_IMAGE /app/node_modules /app/node_modules
 
 WORKDIR /app
-COPY ./*.js ./package.json ./tsconfig.json ./yarn.lock ./
+COPY ./*.js ./package.json ./tsconfig.json ./yarn.lock ./default.yaml ./
 
 USER 1000
 

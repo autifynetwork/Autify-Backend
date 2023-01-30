@@ -44,16 +44,14 @@ const startServer = async () => {
     if (isProd)
         app.use(
             helmet({
-                contentSecurityPolicy: apolloConfig.playground
-                    ? false
-                    : undefined,
-            })
+                contentSecurityPolicy: apolloConfig.playground ? false : undefined,
+            }),
         )
 
     app.use(
         PinoHttp({
             autoLogging: true,
-        })
+        }),
     )
 
     app.get('/healthz', (_, r) => r.sendStatus(200))
@@ -61,7 +59,7 @@ const startServer = async () => {
     apolloServer.applyMiddleware({ app, path: '/graphql' })
 
     httpServer.listen({ port: APP_PORT }, () =>
-        baseLogger.info('🚀 Server listening on port ' + APP_PORT)
+        baseLogger.info('🚀 Server listening on port ' + APP_PORT),
     )
 
     httpServer.on('error', (err) => {

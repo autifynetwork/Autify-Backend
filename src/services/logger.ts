@@ -7,3 +7,5 @@ const baseLogger = pino({
 export default baseLogger
 
 export const httpLogger = baseLogger.child({ module: 'httpServer' })
+
+export const sendgridLogger = baseLogger.child({ module: 'sendgrid' })

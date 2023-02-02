@@ -6,7 +6,12 @@ const defaultContent = fs.readFileSync('./default.yaml', 'utf8')
 
 // TODO: Custom config.yaml
 
-export const yamlConfig = yaml.load(defaultContent)
+export const yamlConfig = yaml.load(defaultContent) as {
+    apollo: ApolloConfig
+    email: EmailConfig
+}
 
 /* Config easy access */
 export const apolloConfig: ApolloConfig = yamlConfig.apollo
+
+export const otp: EmailConfig = yamlConfig.email

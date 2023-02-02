@@ -6,3 +6,11 @@ apollo:
     # If playground is enabled, but introspection is disabled,
     # the playground might not work properly as expected
     introspection: true
+
+# Email configuration
+email:
+    otp:
+        # OTP length
+        length: 6
+        # OTP will expire after given time
+        expiration_time: 10m

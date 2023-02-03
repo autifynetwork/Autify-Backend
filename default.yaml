@@ -8,9 +8,8 @@ apollo:
     introspection: true
 
 # Email configuration
-email:
-    otp:
-        # OTP length
-        length: 6
-        # OTP will expire after given time
-        expiration_time: 10m
+otp:
+    # OTP length
+    length: 4
+    # OTP will expire after given time
+    expiration_time: 10m

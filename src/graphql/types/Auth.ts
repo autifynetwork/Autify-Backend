@@ -1,12 +1,22 @@
+import { Length } from 'class-validator'
 import { Field, InputType } from 'type-graphql'
 
-import { UserAuth } from './UserAuth'
+import { emailotp } from '@config'
+
+import { UserAuth } from '@graphql/types/UserAuth'
 
 @InputType()
 export class Auth implements Partial<UserAuth> {
     @Field()
     to: string
+}
+
+@InputType()
+export class EmailOTP implements Partial<UserAuth> {
+    @Field()
+    to: string
 
     @Field()
-    text: string
+    @Length(emailotp.length)
+    otp: string
 }

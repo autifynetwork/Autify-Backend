@@ -11,4 +11,5 @@ type SendgridConfig = {
 type OtpConfig = {
     length: number
     expiration_time: string
+    retries: number
 }

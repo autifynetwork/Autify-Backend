@@ -13,4 +13,4 @@ export const yamlConfig = yaml.load(defaultContent) as {
 
 /* Config easy access */
 export const apolloConfig: ApolloConfig = yamlConfig.apollo
-export const emailotp: OtpConfig = yamlConfig.otp
+export const otp: OtpConfig = yamlConfig.otp

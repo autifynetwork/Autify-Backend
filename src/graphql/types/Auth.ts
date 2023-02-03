@@ -1,13 +1,14 @@
 import { Length } from 'class-validator'
 import { Field, InputType } from 'type-graphql'
 
-import { emailotp } from '@config'
+import { otp } from '@config'
 
 import { UserAuth } from '@graphql/types/UserAuth'
 
 @InputType()
 export class Auth implements Partial<UserAuth> {
     @Field()
+    @Length(otp.length)
     to: string
 }
 
@@ -17,6 +18,6 @@ export class EmailOTP implements Partial<UserAuth> {
     to: string
 
     @Field()
-    @Length(emailotp.length)
+    @Length(otp.length)
     otp: string
 }

@@ -3,7 +3,7 @@ import crypto from 'crypto'
 import ms from 'ms'
 
 import redis from '@services/cache'
-import { emailotp } from '@config'
+import { otp as otpConfig } from '@config'
 
 type CachedOTPSpec = {
     otp: string
@@ -11,10 +11,10 @@ type CachedOTPSpec = {
 }
 
 export const createOTP = async (identifier: string): Promise<string> => {
-    const otp_numeric = crypto.randomInt(0, Math.pow(10, emailotp.length))
-    const otp = otp_numeric.toString().padStart(emailotp.length, '0')
+    const otp_numeric = crypto.randomInt(0, 1000000)
+    const otp = otp_numeric.toString().padStart(6, '0')
 
-    const detonate = ms(emailotp.expiration_time)
+    const detonate = ms(otpConfig.expiration_time)
 
     const cached_otp: CachedOTPSpec = {
         otp,

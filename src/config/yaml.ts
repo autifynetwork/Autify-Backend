@@ -8,10 +8,9 @@ const defaultContent = fs.readFileSync('./default.yaml', 'utf8')
 
 export const yamlConfig = yaml.load(defaultContent) as {
     apollo: ApolloConfig
-    email: EmailConfig
+    otp: OtpConfig
 }
 
 /* Config easy access */
 export const apolloConfig: ApolloConfig = yamlConfig.apollo
-
-export const otp: EmailConfig = yamlConfig.email
+export const emailotp: OtpConfig = yamlConfig.otp

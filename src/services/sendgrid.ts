@@ -4,20 +4,20 @@ import { sendgridLogger } from '@services/logger'
 
 sgMail.setApiKey(sendgridConfig.sendgrid_api)
 
-export const sendMail = async (to: string, text: string) => {
+export const sendMail = async (to: string, otp: string) => {
     try {
         await sgMail.send({
             from: sendgridConfig.email_id,
             to,
             subject: 'Autify Authentication',
-            text,
-            html: `<p>${text}</p>`,
+            text: `Your Authentication Code is ${otp}`,
+            html: `<p>Your Authentication Code is ${otp}</p>`,
         })
     } catch (error) {
-        sendgridLogger.error({ error, to, text })
+        sendgridLogger.error({ error, to })
         throw error
     }
 
-    sendgridLogger.info('Email sent successfully', { to, text })
+    sendgridLogger.info('Email sent successfully', { to, otp })
     return true
 }

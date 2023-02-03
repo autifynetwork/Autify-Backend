@@ -8,9 +8,7 @@ type SendgridConfig = {
     email_id: string
 }
 
-type EmailConfig = {
-    otp: {
-        length: number
-        expiration_time: string
-    }
+type OtpConfig = {
+    length: number
+    expiration_time: string
 }

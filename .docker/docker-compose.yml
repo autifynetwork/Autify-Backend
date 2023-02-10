@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+    redis:
+        image: bitnami/redis
+        restart: always
+        ports:
+            - "6379:6379"
+        volumes: 
+            - "db-cache:/data"
+        environment: 
+            - ALLOW_EMPTY_PASSWORD=yes
+    db:
+        image: postgres
+        container_name: db
+        volumes:
+            - 'db-data:/var/lib/postgresql/data'
+        ports:
+            - '5432:5432'
+        environment:
+            POSTGRES_USER: username
+            POSTGRES_PASSWORD: password
+            POSTGRES_DB: autifynetwork
+        networks:
+            - intranet
+    
+    nginx:
+        image: nginx
+        ports:
+            - "80:80"
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+        volumes:
+            - ./nginx:/etc/nginx/conf.d
+        networks:
+            - intranet
+
+    app:
+        build: ..
+        env_file:
+            - ../.env
+        environment:
+            DATABASE_URL: postgresql://username:password@db:5432/autifynetwork
+        links: [db]
+        ports:
+            - '3000:3000'
+
+volumes:
+    db-data:
+        driver: local
+    db-cache:
+        driver: local
+networks:
+    intranet:

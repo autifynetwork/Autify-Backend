@@ -1,14 +1,15 @@
-db: 
-	docker-compose up db -d
-
 deps:
-	make db
+	direnv reload
+	cd .docker && docker compose up db redis nginx -d
 
 stop:
-	docker-compose down
+	cd .docker && docker-compose down
 
+down: destroy
 destroy:
-	docker-compose down -v
-	docker-compose rm -f
+	cd .docker && docker-compose down -v
+	cd .docker && docker-compose rm -f
+logs: 
+	cd .docker && docker compose logs -f
 
-.PHONY: db stop destroy
+.PHONY: deps stop down destroy logs

@@ -1,11 +1,7 @@
-import { Field, Int, ObjectType } from 'type-graphql'
-import { IsIn } from 'class-validator'
+import { Field, ObjectType } from 'type-graphql'
 
 @ObjectType()
 export class Brand {
-    @Field(() => Int)
-    id: number
-
     @Field()
     email: string
 
@@ -13,6 +9,5 @@ export class Brand {
     name: string
 
     @Field()
-    @IsIn(['silver', 'gold', 'diamond'])
-    tier: string
+    whitelist: boolean
 }

@@ -7,10 +7,8 @@ export class VendorResolver {
     @Query(() => Vendor)
     async vendor(): Promise<Vendor> {
         return {
-            id: 123,
             email: 'hellovendor@gmail.com',
             name: 'iamvendor',
-            role: 'middleman',
         }
     }
 }

@@ -7,10 +7,8 @@ export class BrandResolver {
     @Query(() => Brand)
     async brand(): Promise<Brand> {
         return {
-            id: 123,
             email: 'brand@gmail.com',
             name: 'iambrand',
-            tier: 'diamond',
         }
     }
 }

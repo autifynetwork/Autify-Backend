@@ -8,47 +8,13 @@ datasource db {
 }
 
 model Brand {
-  id             Int            @id @default(autoincrement())
-  email          String         @unique
+  email          String  @unique
   name           String
-  tier           Tier
-  VendorProfile  VendorProfile?
-  BrandProfile   BrandProfile?  @relation(fields: [brandProfileId], references: [id])
-  brandProfileId Int?
+  whitelist      Boolean @default(false)
 }
 
 model Vendor {
-  id              Int            @id @default(autoincrement())
-  email           String
-  name            String
-  profile         VendorProfile? @relation(fields: [vendorProfileId], references: [id])
-  vendorProfileId Int?
-  BrandProfile    BrandProfile?
-  role            Role?
-}
-
-model BrandProfile {
-  id      Int     @id @default(autoincrement())
-  vendor  Vendor  @relation(fields: [brandId], references: [id])
-  brandId Int     @unique
-  Brand   Brand[]
-}
-
-model VendorProfile {
-  id       Int      @id @default(autoincrement())
-  brand    Brand    @relation(fields: [vendorId], references: [id])
-  vendorId Int      @unique
-  vendor   Vendor[]
-}
-
-enum Role {
-  firstParty
-  middleMan
-  distributor
-}
-
-enum Tier {
-  silver
-  gold
-  diamond
+  email     String @unique
+  name      String
+  whitelist Boolean @default(false)
 }

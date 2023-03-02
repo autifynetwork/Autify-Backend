@@ -8,13 +8,14 @@ datasource db {
 }
 
 model Brand {
-  email          String  @unique
-  name           String
-  whitelist      Boolean @default(false)
+  id        Int     @id @default(autoincrement())
+  email     String  @unique
+  name      String
+  whitelist Boolean @default(false)
 }
 
 model Vendor {
-  email     String @unique
+  email     String  @unique
   name      String
   whitelist Boolean @default(false)
 }

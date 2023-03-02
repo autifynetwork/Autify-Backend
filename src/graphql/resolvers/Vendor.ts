@@ -9,6 +9,7 @@ export class VendorResolver {
         return {
             email: 'hellovendor@gmail.com',
             name: 'iamvendor',
+            whitelist: false
         }
     }
 }

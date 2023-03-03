@@ -1,12 +1,30 @@
-import { Field, ObjectType } from 'type-graphql'
+import { Field, InputType, ObjectType } from 'type-graphql'
 
-@ObjectType()
-export class Brand {
-    @Field() 
-    email?: string
+// @ArgsType()
+// export class EmailInput {
+//     @Field()
+//     email: string
+
+//     @Field()
+//     whitelist: boolean
+// }
+
+@InputType()
+export class EmailInput {
+    @Field()
+    email: string
 
     @Field()
-    name?: string
+    whitelist: boolean
+}
+
+@ObjectType()
+export class BrandObject {
+    @Field()
+    id: number
+
+    @Field()
+    email?: string
 
     @Field(() => Boolean)
     whitelist: boolean

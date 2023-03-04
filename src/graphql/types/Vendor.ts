@@ -6,6 +6,7 @@ import { Brand } from '@prisma/client'
 export class CreateVendorInput {
     @Field(() => ID)
     id: string
+
     @Field({ nullable: true })
     name?: string
 

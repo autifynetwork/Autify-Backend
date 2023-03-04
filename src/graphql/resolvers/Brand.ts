@@ -6,6 +6,7 @@ import prisma from '@services/prisma'
 
 @Resolver()
 export class BrandResolver {
+    // Creation and Update validation of a brand
     @Mutation(() => BrandObject)
     async populateBrand(
         @Arg('email') email: string,
@@ -32,6 +33,7 @@ export class BrandResolver {
         return brand
     }
 
+    // Deletion of a brand
     @Mutation(() => BrandObject)
     async deleteBrand(@Arg('email') email: string): Promise<Brand> {
         const brand = await prisma.brand.delete({ where: { email } })

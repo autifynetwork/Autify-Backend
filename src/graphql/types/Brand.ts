@@ -8,8 +8,8 @@ export class BrandObject {
     @Field()
     email?: string
 
-    @Field(() => Boolean)
-    whitelist: boolean
+    @Field()
+    whitelist: string
 
     @Field({ nullable: true })
     name?: string

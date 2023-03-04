@@ -13,11 +13,19 @@ export class BrandResolver {
     ): Promise<Brand> {
         let brand = await prisma.brand.findUnique({ where: { email } })
         if (!brand) {
-            brand = await prisma.brand.create({ data: { email, whitelist: false, name } })
+            brand = await prisma.brand.create({
+                data: {
+                    email,
+                    whitelist: false,
+                    name,
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                },
+            })
         } else {
             brand = await prisma.brand.update({
                 where: { email },
-                data: { whitelist: true, name },
+                data: { whitelist: true, name, updatedAt: new Date() },
             })
         }
         return brand

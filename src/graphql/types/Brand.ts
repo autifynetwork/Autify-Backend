@@ -3,7 +3,7 @@ import { Field, ID, ObjectType } from 'type-graphql'
 @ObjectType()
 export class BrandObject {
     @Field(() => ID)
-    id: number
+    id: string
 
     @Field()
     email?: string
@@ -13,4 +13,10 @@ export class BrandObject {
 
     @Field({ nullable: true })
     name?: string
+
+    @Field()
+    createdAt: Date
+
+    @Field()
+    updatedAt: Date
 }

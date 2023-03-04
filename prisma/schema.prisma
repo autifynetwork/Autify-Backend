@@ -10,7 +10,7 @@ datasource db {
 model Brand {
   id        Int     @id @default(autoincrement())
   email     String  @unique
-  name      String
+  name      String?
   whitelist Boolean @default(false)
 }
 

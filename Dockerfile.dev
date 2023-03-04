@@ -6,14 +6,14 @@ WORKDIR /app
 COPY *.json ./yarn.lock ./
 RUN yarn install
 
-# Build Source Code
+# Run Source Code
 COPY ./src ./src
 RUN yarn dev
 
-FROM node:18
-COPY . .
-WORKDIR /app
-COPY ./*.js ./package.json ./tsconfig.json ./yarn.lock ./default.yaml ./
+# FROM node:18
+# COPY . .
+# WORKDIR /app
+# COPY ./*.js ./package.json ./tsconfig.json ./yarn.lock ./default.yaml ./
 
 USER 1000
 

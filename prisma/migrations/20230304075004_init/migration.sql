@@ -2,7 +2,7 @@
 CREATE TABLE "Brand" (
     "id" SERIAL NOT NULL,
     "email" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
+    "name" TEXT,
     "whitelist" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "Brand_pkey" PRIMARY KEY ("id")

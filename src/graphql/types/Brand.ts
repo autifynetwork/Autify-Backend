@@ -11,6 +11,6 @@ export class BrandObject {
     @Field(() => Boolean)
     whitelist: boolean
 
-    @Field()
+    @Field({ nullable: true })
     name?: string
 }

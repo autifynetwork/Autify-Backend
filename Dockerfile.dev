@@ -1,0 +1,20 @@
+FROM node:18
+
+WORKDIR /app
+
+# Install dependencies
+COPY *.json ./yarn.lock ./
+RUN yarn install
+
+# Build Source Code
+COPY ./src ./src
+RUN yarn dev
+
+FROM node:18
+COPY . .
+WORKDIR /app
+COPY ./*.js ./package.json ./tsconfig.json ./yarn.lock ./default.yaml ./
+
+USER 1000
+
+CMD ["lib/servers/graphql-main.js"]

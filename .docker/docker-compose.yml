@@ -43,7 +43,7 @@ services:
             DATABASE_URL: postgresql://username:password@db:5432/autifynetwork
         links: [db]
         ports:
-            - '3000:3000'
+            - '4000:4000'
 
 volumes:
     db-data:

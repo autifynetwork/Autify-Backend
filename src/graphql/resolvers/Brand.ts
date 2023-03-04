@@ -1,16 +1,19 @@
 import { Arg, Mutation, Resolver } from 'type-graphql'
 
-import { BrandObject, EmailInput } from '@graphql/types/Brand'
-// import { Brand } from '@prisma/client'
+import { BrandObject } from '@graphql/types/Brand'
+import { Brand } from '@prisma/client'
 import prisma from '@services/prisma'
 
 @Resolver()
 export class BrandResolver {
     @Mutation(() => BrandObject)
-    async populateBrand(@Arg('email') { email }: EmailInput): Promise<BrandObject> {
+    async populateBrand(
+        @Arg('email') email: string,
+        @Arg('name') name: string,
+    ): Promise<Brand> {
         let brand = await prisma.brand.findUnique({ where: { email } })
         if (!brand) {
-            brand = await prisma.brand.create({ data: { email, whitelist: false } })
+            brand = await prisma.brand.create({ data: { email, whitelist: false, name } })
         } else {
             brand = await prisma.brand.update({
                 where: { email },

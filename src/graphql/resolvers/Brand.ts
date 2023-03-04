@@ -31,4 +31,10 @@ export class BrandResolver {
         }
         return brand
     }
+
+    @Mutation(() => BrandObject)
+    async deleteBrand(@Arg('email') email: string): Promise<Brand> {
+        const brand = await prisma.brand.delete({ where: { email } })
+        return brand
+    }
 }

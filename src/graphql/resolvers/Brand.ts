@@ -1,16 +1,42 @@
-import { Query, Resolver } from 'type-graphql'
+import { Arg, Mutation, Resolver } from 'type-graphql'
 
-import { Brand } from '@graphql/types/Brand'
+import { BrandObject } from '@graphql/types/Brand'
+import { Brand } from '@prisma/client'
+import prisma from '@services/prisma'
 
 @Resolver()
 export class BrandResolver {
-    @Query(() => Brand)
-    async brand(): Promise<Brand> {
-        return {
-            id: 123,
-            email: 'brand@gmail.com',
-            name: 'iambrand',
-            tier: 'diamond',
+    // Creation and Update validation of a brand
+    @Mutation(() => BrandObject)
+    async populateBrand(
+        @Arg('email') email: string,
+        @Arg('name', { nullable: true }) name: string,
+        @Arg('whitelist', { nullable: true }) whitelist: string,
+    ): Promise<Brand> {
+        let brand = await prisma.brand.findUnique({ where: { email } })
+        if (!brand) {
+            brand = await prisma.brand.create({
+                data: {
+                    email,
+                    whitelist,
+                    name,
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                },
+            })
+        } else {
+            brand = await prisma.brand.update({
+                where: { email },
+                data: { whitelist, name, updatedAt: new Date() },
+            })
         }
+        return brand
+    }
+
+    // Deletion of a brand
+    @Mutation(() => BrandObject)
+    async deleteBrand(@Arg('email') email: string): Promise<Brand> {
+        const brand = await prisma.brand.delete({ where: { email } })
+        return brand
     }
 }

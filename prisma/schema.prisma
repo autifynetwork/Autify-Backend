@@ -8,47 +8,31 @@ datasource db {
 }
 
 model Brand {
-  id             Int            @id @default(autoincrement())
-  email          String         @unique
-  name           String
-  tier           Tier
-  VendorProfile  VendorProfile?
-  BrandProfile   BrandProfile?  @relation(fields: [brandProfileId], references: [id])
-  brandProfileId Int?
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  whitelist String   @default("false")
+  vendors   Vendor[] @relation("brandVendors")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Vendor {
-  id              Int            @id @default(autoincrement())
-  email           String
-  name            String
-  profile         VendorProfile? @relation(fields: [vendorProfileId], references: [id])
-  vendorProfileId Int?
-  BrandProfile    BrandProfile?
-  role            Role?
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  whitelist String   @default("false")
+  tags      Tag[]    @relation("vendorTags")
+  brand     Brand    @relation("brandVendors", fields: [brandId], references: [id])
+  brandId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-model BrandProfile {
-  id      Int     @id @default(autoincrement())
-  vendor  Vendor  @relation(fields: [brandId], references: [id])
-  brandId Int     @unique
-  Brand   Brand[]
-}
-
-model VendorProfile {
-  id       Int      @id @default(autoincrement())
-  brand    Brand    @relation(fields: [vendorId], references: [id])
-  vendorId Int      @unique
-  vendor   Vendor[]
-}
-
-enum Role {
-  firstParty
-  middleMan
-  distributor
-}
-
-enum Tier {
-  silver
-  gold
-  diamond
+model Tag {
+  id        String   @id @default(cuid())
+  name      String
+  vendors   Vendor[] @relation("vendorTags")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

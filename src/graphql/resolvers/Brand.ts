@@ -1,4 +1,4 @@
-import { Arg, Mutation, Resolver } from 'type-graphql'
+import { Arg, Mutation, Query, Resolver } from 'type-graphql'
 
 import { BrandObject } from '@graphql/types/Brand'
 import { Brand } from '@prisma/client'
@@ -6,6 +6,37 @@ import prisma from '@services/prisma'
 
 @Resolver()
 export class BrandResolver {
+    @Query(() => String)
+    async checkEmail(@Arg('email') email: string) {
+        const checkEmail = await prisma.brand.findFirst({ where: { email } })
+        try {
+            if (checkEmail) {
+                if (checkEmail.whitelist == 'true') {
+                    return `${checkEmail.email} is whitelisted`
+                } else {
+                    return `${checkEmail.email} is not whitelisted`
+                }
+            } else {
+                return 'Brand Email Not Found'
+            }
+        } catch (error) {
+            throw new error('Something went wrong, Please try again')
+        }
+    }
+
+    @Query(() => BrandObject)
+    async checkBrand(@Arg('email') email: string) {
+        const checkBrand = await prisma.brand.findFirst({ where: { email } })
+        try {
+            if (!checkBrand) {
+                return `${checkBrand} not found`
+            } else {
+                return checkBrand
+            }
+        } catch (error) {
+            throw new error('Something went wrong, Please try again')
+        }
+    }
     // Creation and Update validation of a brand
     @Mutation(() => BrandObject)
     async populateBrand(
@@ -13,9 +44,9 @@ export class BrandResolver {
         @Arg('name', { nullable: true }) name: string,
         @Arg('whitelist', { nullable: true }) whitelist: string,
     ): Promise<Brand> {
-        let brand = await prisma.brand.findUnique({ where: { email } })
-        if (!brand) {
-            brand = await prisma.brand.create({
+        let brandEmail = await prisma.brand.findUnique({ where: { email } })
+        if (!brandEmail) {
+            brandEmail = await prisma.brand.create({
                 data: {
                     email,
                     whitelist,
@@ -25,12 +56,12 @@ export class BrandResolver {
                 },
             })
         } else {
-            brand = await prisma.brand.update({
+            brandEmail = await prisma.brand.update({
                 where: { email },
                 data: { whitelist, name, updatedAt: new Date() },
             })
         }
-        return brand
+        return brandEmail
     }
 
     // Deletion of a brand

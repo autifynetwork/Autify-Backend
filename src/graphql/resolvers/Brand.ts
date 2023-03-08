@@ -11,7 +11,7 @@ export class BrandResolver {
         const checkEmail = await prisma.brand.findFirst({ where: { email } })
         try {
             if (checkEmail) {
-                if (checkEmail.whitelist == 'true') {
+                if (checkEmail.whitelist == true) {
                     return true
                 } else {
                     return false
@@ -42,7 +42,7 @@ export class BrandResolver {
     async populateBrand(
         @Arg('email') email: string,
         @Arg('name', { nullable: true }) name: string,
-        @Arg('whitelist', { nullable: true }) whitelist: string,
+        @Arg('whitelist', { nullable: true }) whitelist: boolean,
     ): Promise<Brand> {
         let brandEmail = await prisma.brand.findUnique({ where: { email } })
         if (!brandEmail) {

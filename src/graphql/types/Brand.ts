@@ -9,7 +9,7 @@ export class BrandObject {
     email?: string
 
     @Field()
-    whitelist: string
+    whitelist: boolean
 
     @Field({ nullable: true })
     name?: string

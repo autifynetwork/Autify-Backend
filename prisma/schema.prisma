@@ -11,7 +11,7 @@ model Brand {
   id        String   @id @default(cuid())
   email     String   @unique
   name      String?
-  whitelist String   @default("false")
+  whitelist Boolean   @default(false)
   vendors   Vendor[] @relation("brandVendors")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

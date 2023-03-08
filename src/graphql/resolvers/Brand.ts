@@ -12,9 +12,9 @@ export class BrandResolver {
         try {
             if (checkEmail) {
                 if (checkEmail.whitelist == 'true') {
-                    return `${checkEmail.email} is whitelisted`
+                    return true
                 } else {
-                    return `${checkEmail.email} is not whitelisted`
+                    return false
                 }
             } else {
                 return 'Brand Email Not Found'

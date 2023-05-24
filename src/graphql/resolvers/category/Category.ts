@@ -1,5 +1,5 @@
 import { Query, Arg, Mutation, Resolver } from 'type-graphql'
-import { CategoryObject, CreateCategoryInput } from '@graphql/types/Category'
+import { CreateCategoryInput, updateCategory } from '@graphql/types/Category'
 import { Category } from '@prisma/client'
 import prisma from '@services/prisma'
 
@@ -10,17 +10,61 @@ export class CategoryResolver {
         return 'Hello, World!'
     }
 
-    @Mutation(() => CategoryObject)
+    // creation of category
+    @Mutation(() => CreateCategoryInput)
     async createCategory(
-        @Arg('data') data: CreateCategoryInput
+        @Arg('categoryName') categoryName: string,
+        @Arg('categoryImgUrl') categoryImgUrl: string,
+        @Arg('status', { nullable: true }) status: boolean
     ): Promise<Category> {
-        const category = await prisma.category.create({
+        let category_name = await prisma.category.findFirst({
+            where: { categoryName },
+        })
+        const category_img_url = await prisma.category.findFirst({
+            where: { categoryImgUrl },
+        })
+        if (category_img_url?.categoryImgUrl) {
+            throw new Error(`category link already exists`)
+        } else if (category_name?.categoryName) {
+            throw new Error(`category name already exists`)
+        } else {
+            category_name = await prisma.category.create({
+                data: {
+                    categoryName,
+                    categoryImgUrl,
+                    status,
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                },
+            })
+        }
+        return category_name
+    }
+
+    // update of category
+    @Mutation(() => updateCategory)
+    async updateCategory(
+        @Arg('categoryId') categoryId: string,
+        @Arg('categoryName', { nullable: true }) categoryName: string,
+        @Arg('categoryImgUrl', { nullable: true }) categoryImgUrl: string,
+        @Arg('status', { nullable: true }) status: boolean
+    ): Promise<Category> {
+        const category = await prisma.category.findUnique({
+            where: { id: categoryId },
+        })
+
+        if (!category) {
+            throw new Error(`category not found`)
+        }
+        const updatedCategory = await prisma.category.update({
+            where: { id: categoryId },
             data: {
-                id: data.id,
-                categoryName: data.categoryName,
-                image: data.image,
+                categoryName: categoryName || category.categoryName,
+                categoryImgUrl: categoryImgUrl || category.categoryImgUrl,
+                status: status !== undefined ? status : category.status,
+                updatedAt: new Date(),
             },
         })
-        return category
+        return updatedCategory
     }
 }

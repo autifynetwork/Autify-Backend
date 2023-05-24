@@ -1,6 +1,6 @@
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 
-@InputType()
+@ObjectType()
 export class CreateCategoryInput {
     @Field(() => ID)
     id: string
@@ -9,11 +9,14 @@ export class CreateCategoryInput {
     categoryName: string
 
     @Field(() => String)
-    image: string
+    categoryImgUrl: string
+
+    @Field(() => Boolean)
+    status: boolean
 }
 
 @ObjectType()
-export class CategoryObject {
+export class updateCategory {
     @Field(() => ID)
     id: string
 
@@ -21,11 +24,8 @@ export class CategoryObject {
     categoryName: string
 
     @Field(() => String)
-    image: string
+    categoryImgUrl: string
 
-    @Field(() => Date)
-    createdAt: Date
-
-    @Field(() => Date)
-    updatedAt: Date
+    @Field(() => Boolean)
+    status: boolean
 }

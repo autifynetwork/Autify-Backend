@@ -75,6 +75,8 @@ export class BrandResolver {
         if (!brand || !vendor) {
             throw new Error('Brand or Vendor not found')
         }
+        // TODO : add one more check to ensure if the brand is already a vendor of the vendor
+
         const updatedBrand = await prisma.brand.update({
             where: { email },
             data: {

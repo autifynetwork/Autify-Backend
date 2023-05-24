@@ -14,7 +14,8 @@ CREATE TABLE "Brand" (
 CREATE TABLE "Category" (
     "id" TEXT NOT NULL,
     "categoryName" TEXT NOT NULL,
-    "image" TEXT NOT NULL,
+    "categoryImgUrl" TEXT NOT NULL,
+    "status" BOOLEAN NOT NULL DEFAULT true,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 

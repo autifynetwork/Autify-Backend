@@ -42,7 +42,7 @@ export class BrandResolver {
     async populateBrand(
         @Arg('email') email: string,
         @Arg('name', { nullable: true }) name: string,
-        @Arg('whitelist', { nullable: true }) whitelist: boolean,
+        @Arg('whitelist', { nullable: true }) whitelist: boolean
     ): Promise<Brand> {
         let brandEmail = await prisma.brand.findUnique({ where: { email } })
         if (!brandEmail) {
@@ -62,6 +62,30 @@ export class BrandResolver {
             })
         }
         return brandEmail
+    }
+
+    @Mutation(() => BrandObject) async addVendor(
+        @Arg('email') email: string,
+        @Arg('vendorEmail') vendorEmail: string
+    ): Promise<Brand> {
+        const brand = await prisma.brand.findUnique({ where: { email } })
+        const vendor = await prisma.brand.findUnique({
+            where: { email: vendorEmail },
+        })
+        if (!brand || !vendor) {
+            throw new Error('Brand or Vendor not found')
+        }
+        const updatedBrand = await prisma.brand.update({
+            where: { email },
+            data: {
+                vendors: {
+                    connect: {
+                        email: vendorEmail,
+                    },
+                },
+            },
+        })
+        return updatedBrand
     }
 
     // Deletion of a brand

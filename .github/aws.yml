@@ -1,83 +1,81 @@
 name: Deploy to Amazon ECS
 
 on:
-  push:
-    branches: [main]
+    push:
+        branches: [main]
 
 env:
-  DOCKERHUB_USERNAME: your_dockerhub_username
-  DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
-  AWS_REGION: your_aws_region
-  AWS_ACCOUNT_ID: your_aws_account_id
-  ECR_REPOSITORY: your_ecr_repository_name
-  ECS_SERVICE: your_ecs_service_name
-  ECS_CLUSTER: your_ecs_cluster_name
-  ECS_TASK_DEFINITION: path/to/your/task_definition.json
-  CONTAINER_NAME: your_container_name
-
+    DOCKERHUB_USERNAME: autifynetwork
+    DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+    AWS_REGION:
+    AWS_ACCOUNT_ID: 061365788240
+    ECR_REPOSITORY: autifynetwork/autify-network
+    ECS_SERVICE: ec2-autify-network
+    ECS_CLUSTER: aut-cluster-ec
+    ECS_TASK_DEFINITION: $HOME/task_definition.json
+    CONTAINER_NAME: aut-cn
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
+    deploy:
+        runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
 
-    - name: Login to Docker Hub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ env.DOCKERHUB_USERNAME }}
-        password: ${{ env.DOCKERHUB_PASSWORD }}
+            - name: Login to Docker Hub
+              uses: docker/login-action@v1
+              with:
+                  username: ${{ env.DOCKERHUB_USERNAME }}
+                  password: ${{ env.DOCKERHUB_PASSWORD }}
 
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v2
-      with:
-        context: .
-        push: true
-        tags: your_dockerhub_username/image_name:latest
+            - name: Build and push Docker image
+              uses: docker/build-push-action@v2
+              with:
+                  context: .
+                  push: true
+                  tags: your_dockerhub_username/image_name:latest
 
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ env.AWS_REGION }}
+            - name: Configure AWS credentials
+              uses: aws-actions/configure-aws-credentials@v1
+              with:
+                  aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                  aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  aws-region: ${{ env.AWS_REGION }}
 
-    - name: Create Amazon ECR repository if it does not exist
-      id: create-ecr-repo
-      run: |
-        aws ecr describe-repositories --repository-names $ECR_REPOSITORY || aws ecr create-repository --repository-name $ECR_REPOSITORY
+            - name: Create Amazon ECR repository if it does not exist
+              id: create-ecr-repo
+              run: |
+                  aws ecr describe-repositories --repository-names $ECR_REPOSITORY || aws ecr create-repository --repository-name $ECR_REPOSITORY
 
-    - name: Login to Amazon ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v1
-      with:
-        registry: ${{ steps.create-ecr-repo.outputs.repository-url }}
+            - name: Login to Amazon ECR
+              id: login-ecr
+              uses: aws-actions/amazon-ecr-login@v1
+              with:
+                  registry: ${{ steps.create-ecr-repo.outputs.repository-url }}
 
-    - name: Tag Docker image with ECR repository URL and latest tag
-      id: tag-image
-      run: |
-        docker tag your_dockerhub_username/image_name:latest ${{ steps.create-ecr-repo.outputs.repository-url }}:latest
+            - name: Tag Docker image with ECR repository URL and latest tag
+              id: tag-image
+              run: |
+                  docker tag your_dockerhub_username/image_name:latest ${{ steps.create-ecr-repo.outputs.repository-url }}:latest
 
-    - name: Push Docker image to Amazon ECR
-      id: push-image
-      run: |
-        docker push ${{ steps.create-ecr-repo.outputs.repository-url }}:latest
+            - name: Push Docker image to Amazon ECR
+              id: push-image
+              run: |
+                  docker push ${{ steps.create-ecr-repo.outputs.repository-url }}:latest
 
-    - name: Fill in the new image ID in the Amazon ECS task definition
-      id: task-def
-      uses: aws-actions/amazon-ecs-render-task-definition@v1
-      with:
-        task-definition: ${{ env.ECS_TASK_DEFINITION }}
-        container-name: ${{ env.CONTAINER_NAME }}
-        image: ${{ steps.create-ecr-repo.outputs.repository-url }}:latest
+            - name: Fill in the new image ID in the Amazon ECS task definition
+              id: task-def
+              uses: aws-actions/amazon-ecs-render-task-definition@v1
+              with:
+                  task-definition: ${{ env.ECS_TASK_DEFINITION }}
+                  container-name: ${{ env.CONTAINER_NAME }}
+                  image: ${{ steps.create-ecr-repo.outputs.repository-url }}:latest
 
-    - name: Deploy Amazon ECS task definition
-      uses: aws-actions/amazon-ecs-deploy-task-definition@v1
-      with:
-        task-definition: ${{ steps.task-def.outputs.task-definition }}
-        service: ${{ env.ECS_SERVICE }}
-        cluster: ${{ env.ECS_CLUSTER }}
-        wait-for-service-stability: true
-        capabilities: CAPABILITY_IAM
-
+            - name: Deploy Amazon ECS task definition
+              uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+              with:
+                  task-definition: ${{ steps.task-def.outputs.task-definition }}
+                  service: ${{ env.ECS_SERVICE }}
+                  cluster: ${{ env.ECS_CLUSTER }}
+                  wait-for-service-stability: true
+                  capabilities: CAPABILITY_IAM

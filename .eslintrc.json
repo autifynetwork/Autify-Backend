@@ -44,7 +44,7 @@
                 "bracketSpacing": true,
                 "arrowParens": "always",
                 "proseWrap": "preserve",
-                "endOfLine": "lf"
+                "endOfLine": "lf",
             }
         ],
 

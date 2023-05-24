@@ -11,28 +11,17 @@ model Brand {
   id        String   @id @default(cuid())
   email     String   @unique
   name      String?
-  whitelist Boolean   @default(false)
-  vendors   Vendor[] @relation("brandVendors")
+  whitelist Boolean  @default(false)
+  vendors   Brand[]  @relation("VendorBrand")
+  vendorOf  Brand[]  @relation("VendorBrand")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-model Vendor {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  name      String?
-  whitelist String   @default("false")
-  tags      Tag[]    @relation("vendorTags")
-  brand     Brand    @relation("brandVendors", fields: [brandId], references: [id])
-  brandId   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Tag {
-  id        String   @id @default(cuid())
-  name      String
-  vendors   Vendor[] @relation("vendorTags")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Category {
+  id           String   @id @default(cuid())
+  categoryName String
+  image        String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }

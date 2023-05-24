@@ -8,11 +8,17 @@ export class BrandObject {
     @Field()
     email?: string
 
+    @Field({ nullable: true })
+    name?: string
+
     @Field()
     whitelist: boolean
 
-    @Field({ nullable: true })
-    name?: string
+    @Field(() => [BrandObject], { nullable: true })
+    vendors: BrandObject[]
+
+    @Field(() => [BrandObject], { nullable: true })
+    vendorOf: BrandObject[]
 
     @Field()
     createdAt: Date

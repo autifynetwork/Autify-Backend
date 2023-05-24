@@ -1,5 +1,5 @@
 import { Query, Arg, Mutation, Resolver } from 'type-graphql'
-import { CreateCategoryInput, updateCategory } from '@graphql/types/Category'
+import { CreateCategoryInput, CategoryObject } from '@graphql/types/Category'
 import { Category } from '@prisma/client'
 import prisma from '@services/prisma'
 
@@ -42,7 +42,7 @@ export class CategoryResolver {
     }
 
     // update of category
-    @Mutation(() => updateCategory)
+    @Mutation(() => CategoryObject)
     async updateCategory(
         @Arg('categoryId') categoryId: string,
         @Arg('categoryName', { nullable: true }) categoryName: string,
@@ -66,5 +66,22 @@ export class CategoryResolver {
             },
         })
         return updatedCategory
+    }
+
+    // delete of category
+    @Mutation(() => CategoryObject)
+    async deleteCategory(
+        @Arg('categoryId') categoryId: string
+    ): Promise<Category> {
+        const category = await prisma.category.findUnique({
+            where: { id: categoryId },
+        })
+        if (!category) {
+            throw new Error(`category not found`)
+        }
+        const deletedCategory = await prisma.category.delete({
+            where: { id: categoryId },
+        })
+        return deletedCategory
     }
 }

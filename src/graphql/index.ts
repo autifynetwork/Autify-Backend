@@ -3,12 +3,12 @@ import 'reflect-metadata'
 
 import { buildSchema } from 'type-graphql'
 
-import { VendorResolver } from '@graphql/resolvers/Vendor'
 import { BrandResolver } from '@graphql/resolvers/Brand'
+import { CategoryResolver } from '@graphql/resolvers/category/Category'
 
 const getSchema = async () => {
     const schema = await buildSchema({
-        resolvers: [VendorResolver, BrandResolver],
+        resolvers: [BrandResolver, CategoryResolver],
     })
     return schema
 }

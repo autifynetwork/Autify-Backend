@@ -24,7 +24,7 @@ export class BrandResolver {
         }
     }
 
-    @Query(() => BrandObject)
+    @Query(() => String)
     async checkBrand(@Arg('email') email: string) {
         const checkBrand = await prisma.brand.findFirst({ where: { email } })
         try {

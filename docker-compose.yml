@@ -25,7 +25,7 @@ services:
       - .:/app
       - /app/node_modules
     env_file:
-      - .env.dev
+      - .env
     command: npx prisma studio
     links:
       - db
@@ -41,7 +41,7 @@ services:
       - .:/app
       - /app/node_modules
     env_file:
-      - .env.dev
+      - .env
     command: >
         sh -c "npx prisma migrate dev --name init && yarn dev"
 volumes:

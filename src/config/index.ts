@@ -1,4 +1,4 @@
-import AWS from 'aws-sdk'
+// import AWS from 'aws-sdk'
 import dotenv from 'dotenv'
 dotenv.config({ override: true })
 
@@ -11,14 +11,14 @@ export const isDev = process.env.NODE_ENV === 'development'
 
 export const redisUrl = process.env.REDIS_URL || ''
 
-export const awsConfig = () => {
-    const { AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION } = process.env
+// export const awsConfig = () => {
+//     const { AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION } = process.env
 
-    AWS.config.update({
-        accessKeyId: AWS_ACCESS_KEY_ID,
-        secretAccessKey: AWS_SECRET_ACCESS_KEY,
-        region: AWS_REGION,
-    })
+//     AWS.config.update({
+//         accessKeyId: AWS_ACCESS_KEY_ID,
+//         secretAccessKey: AWS_SECRET_ACCESS_KEY,
+//         region: AWS_REGION,
+//     })
 
-    return new AWS.S3()
-}
+//     return new AWS.S3()
+// }

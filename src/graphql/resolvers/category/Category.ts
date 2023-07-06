@@ -2,11 +2,11 @@ import { Query, Arg, Mutation, Resolver } from 'type-graphql'
 import { CreateCategoryInput, CategoryObject } from '@graphql/types/Category'
 import { Category } from '@prisma/client'
 import prisma from '@services/prisma'
-import { awsConfig } from '@config'
-import { S3 } from 'aws-sdk'
-import { v4 as uuidv4 } from 'uuid'
+// import { awsConfig } from '@config'
+// import { S3 } from 'aws-sdk'
+// import { v4 as uuidv4 } from 'uuid'
 // import { GraphQLUpload } from 'graphql-upload'
-import { ReadStream } from 'fs'
+// import { ReadStream } from 'fs'
 
 @Resolver()
 export class CategoryResolver {

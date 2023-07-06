@@ -16,16 +16,16 @@ deps:
 	@if [ "$(ENV)" = "prod" ]; then \
 		./update-env-ip.sh; \
 	fi
-	@export ENV_FILE=$(ENV_FILE) && docker-compose -f $(DOCKER_COMPOSE_FILE) up -d
+	@export ENV_FILE=$(ENV_FILE) && docker compose -f $(DOCKER_COMPOSE_FILE) up -d
 
 stop:
-	@docker-compose -f $(DOCKER_COMPOSE_FILE) down
+	@docker compose -f $(DOCKER_COMPOSE_FILE) down
 down: destroy
 destroy:
-	@docker-compose -f $(DOCKER_COMPOSE_FILE) down -v
-	@docker-compose -f $(DOCKER_COMPOSE_FILE) rm -f
+	@docker compose -f $(DOCKER_COMPOSE_FILE) down -v
+	@docker compose -f $(DOCKER_COMPOSE_FILE) rm -f
 
 logs:
-	@docker-compose -f $(DOCKER_COMPOSE_FILE) logs -f
+	@docker compose -f $(DOCKER_COMPOSE_FILE) logs -f
 
 .PHONY: deps stop down destroy logs

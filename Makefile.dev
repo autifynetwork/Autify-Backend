@@ -1,0 +1,15 @@
+deps:
+	direnv reload
+	docker compose -f docker-compose-dev.yml up  -d
+
+stop:
+	docker-compose -f docker-compose-dev.yml down
+
+down: destroy
+destroy:
+	docker compose -f docker-compose-dev.yml down -v
+	docker compose -f docker-compose-dev.yml rm -f
+logs: 
+	docker compose -f docker-compose-dev.yml logs -f
+
+.PHONY: deps stop down destroy logs

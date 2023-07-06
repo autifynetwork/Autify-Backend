@@ -1,27 +1,16 @@
-ENV ?= dev
-
-ifeq ($(ENV), dev)
-	# Development environment
-	DOCKER_COMPOSE_FILE := docker-compose-dev.yml
-else ifeq ($(ENV), prod)
-	# Production environment
-	./update-env-ip.sh
-	DOCKER_COMPOSE_FILE := docker-compose.yml
-else
-	$(error Unsupported environment: $(ENV))
-endif
-
 deps:
-	@export docker compose -f $(DOCKER_COMPOSE_FILE) up -d
+	direnv reload
+    ./update-env-ip.sh
+	docker compose -f docker-compose.yml up  -d
 
 stop:
-	@docker compose -f $(DOCKER_COMPOSE_FILE) down
+	docker-compose -f docker-compose.yml down
+
 down: destroy
 destroy:
-	@docker compose -f $(DOCKER_COMPOSE_FILE) down -v
-	@docker compose -f $(DOCKER_COMPOSE_FILE) rm -f
-
-logs:
-	@docker compose -f $(DOCKER_COMPOSE_FILE) logs -f
+	docker compose -f docker-compose.yml down -v
+	docker compose -f docker-compose.yml rm -f
+logs: 
+	docker compose -f docker-compose.yml logs -f
 
 .PHONY: deps stop down destroy logs

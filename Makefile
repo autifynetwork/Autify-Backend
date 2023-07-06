@@ -1,6 +1,6 @@
 deps:
 	direnv reload
-    ./update-env-ip.sh
+	./update-env-ip.sh
 	docker compose -f docker-compose.yml up  -d
 
 stop:

@@ -1,5 +1,8 @@
 import { Query, Arg, Mutation, Resolver } from 'type-graphql'
-import { CreateCategoryInput, CategoryObject } from '@graphql/types/Category'
+import {
+    CreateCategoryInput,
+    CategoryObject,
+} from '@graphql/types/CategorySectionTypes/Category'
 import { Category } from '@prisma/client'
 import prisma from '@services/prisma'
 // import { awsConfig } from '@config'

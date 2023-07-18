@@ -23,6 +23,18 @@ CREATE TABLE "Category" (
 );
 
 -- CreateTable
+CREATE TABLE "SubCategory" (
+    "id" TEXT NOT NULL,
+    "subCategoryName" TEXT NOT NULL,
+    "categoryId" TEXT NOT NULL,
+    "status" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "SubCategory_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "_VendorBrand" (
     "A" TEXT NOT NULL,
     "B" TEXT NOT NULL
@@ -32,10 +44,16 @@ CREATE TABLE "_VendorBrand" (
 CREATE UNIQUE INDEX "Brand_email_key" ON "Brand"("email");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "SubCategory_categoryId_key" ON "SubCategory"("categoryId");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "_VendorBrand_AB_unique" ON "_VendorBrand"("A", "B");
 
 -- CreateIndex
 CREATE INDEX "_VendorBrand_B_index" ON "_VendorBrand"("B");
+
+-- AddForeignKey
+ALTER TABLE "SubCategory" ADD CONSTRAINT "SubCategory_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_VendorBrand" ADD CONSTRAINT "_VendorBrand_A_fkey" FOREIGN KEY ("A") REFERENCES "Brand"("id") ON DELETE CASCADE ON UPDATE CASCADE;

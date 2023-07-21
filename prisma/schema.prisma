@@ -21,7 +21,7 @@ model Brand {
 model Category {
   id             String        @id @default(cuid())
   categoryName   String
-  categoryImgUrl String
+  categoryImgUrl String?
   subCategories  SubCategory[]
   status         Boolean       @default(true)
   createdAt      DateTime      @default(now())

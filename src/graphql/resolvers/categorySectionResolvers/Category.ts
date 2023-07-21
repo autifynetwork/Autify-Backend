@@ -5,11 +5,6 @@ import {
 } from '@graphql/types/CategorySectionTypes/Category'
 import { Category } from '@prisma/client'
 import prisma from '@services/prisma'
-// import { awsConfig } from '@config'
-// import { S3 } from 'aws-sdk'
-// import { v4 as uuidv4 } from 'uuid'
-// import { GraphQLUpload } from 'graphql-upload'
-// import { ReadStream } from 'fs'
 
 @Resolver()
 export class CategoryResolver {
@@ -98,25 +93,4 @@ export class CategoryResolver {
         const categories = await prisma.category.findMany()
         return categories
     }
-
-    // upload image
-    // @Mutation(() => String)
-    // async uploadImage(
-    //     @Arg('image', () => GraphQLUpload)
-    //     image: Promise<{ createReadStream: () => ReadStream }>
-    // ): Promise<string> {
-    //     const { createReadStream } = await image
-    //     const stream = createReadStream()
-
-    //     const s3 = awsConfig()
-    //     const upload = {
-    //         Bucket: 'category-images-dev',
-    //         Body: stream,
-    //         Key: `${uuidv4()}.jpg`,
-    //     }
-
-    //     const result = await s3.upload(upload).promise()
-    //     const imageUrl = result.Location
-    //     return imageUrl
-    // }
 }

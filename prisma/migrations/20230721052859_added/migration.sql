@@ -35,6 +35,17 @@ CREATE TABLE "SubCategory" (
 );
 
 -- CreateTable
+CREATE TABLE "ProductList" (
+    "id" TEXT NOT NULL,
+    "productName" TEXT NOT NULL,
+    "status" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "ProductList_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "_VendorBrand" (
     "A" TEXT NOT NULL,
     "B" TEXT NOT NULL

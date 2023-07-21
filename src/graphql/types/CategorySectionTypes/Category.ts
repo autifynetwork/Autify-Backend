@@ -1,4 +1,6 @@
-import { Field, ID, ObjectType } from 'type-graphql'
+import { Field, ID, InputType, ObjectType } from 'type-graphql'
+// import { GraphQLUpload } from 'graphql-upload/GraphQLUpload.js'
+// import Upload from 'graphql-upload/Upload.js'
 
 @ObjectType()
 export class CreateCategoryInput {
@@ -8,8 +10,11 @@ export class CreateCategoryInput {
     @Field(() => String)
     categoryName: string
 
-    @Field(() => String)
+    @Field(() => String, { nullable: true })
     categoryImgUrl: string
+
+    // @Field(() => GraphQLUpload)
+    // categoryImg: Promise<Upload>
 
     @Field(() => Boolean)
     status: boolean

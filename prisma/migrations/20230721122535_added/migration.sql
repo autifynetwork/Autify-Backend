@@ -35,6 +35,41 @@ CREATE TABLE "SubCategory" (
 );
 
 -- CreateTable
+CREATE TABLE "ProductList" (
+    "id" TEXT NOT NULL,
+    "productName" TEXT NOT NULL,
+    "status" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "ProductList_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "ProductAttribute" (
+    "id" TEXT NOT NULL,
+    "attributeName" TEXT NOT NULL,
+    "status" BOOLEAN NOT NULL DEFAULT true,
+    "attributeCategoryId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "ProductAttribute_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "ProductSKU" (
+    "id" TEXT NOT NULL,
+    "productsku" TEXT NOT NULL,
+    "status" BOOLEAN NOT NULL DEFAULT true,
+    "SKUCategoryId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "ProductSKU_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "_VendorBrand" (
     "A" TEXT NOT NULL,
     "B" TEXT NOT NULL
@@ -47,6 +82,12 @@ CREATE UNIQUE INDEX "Brand_email_key" ON "Brand"("email");
 CREATE UNIQUE INDEX "SubCategory_categoryId_key" ON "SubCategory"("categoryId");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "ProductAttribute_attributeCategoryId_key" ON "ProductAttribute"("attributeCategoryId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "ProductSKU_SKUCategoryId_key" ON "ProductSKU"("SKUCategoryId");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "_VendorBrand_AB_unique" ON "_VendorBrand"("A", "B");
 
 -- CreateIndex
@@ -54,6 +95,12 @@ CREATE INDEX "_VendorBrand_B_index" ON "_VendorBrand"("B");
 
 -- AddForeignKey
 ALTER TABLE "SubCategory" ADD CONSTRAINT "SubCategory_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "ProductAttribute" ADD CONSTRAINT "ProductAttribute_attributeCategoryId_fkey" FOREIGN KEY ("attributeCategoryId") REFERENCES "Category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "ProductSKU" ADD CONSTRAINT "ProductSKU_SKUCategoryId_fkey" FOREIGN KEY ("SKUCategoryId") REFERENCES "Category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_VendorBrand" ADD CONSTRAINT "_VendorBrand_A_fkey" FOREIGN KEY ("A") REFERENCES "Brand"("id") ON DELETE CASCADE ON UPDATE CASCADE;

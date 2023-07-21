@@ -2,34 +2,34 @@ import { Field, ID, ObjectType } from 'type-graphql'
 import { CategoryObject } from '@graphql/types/CategorySectionTypes/Category'
 
 @ObjectType()
-export class ProductAttributeInput {
+export class ProductSKUInput {
     @Field(() => ID)
     ID: string
 
     @Field(() => String)
-    productName: string
+    productsku: string
 
     @Field(() => Boolean)
     status: boolean
 
     @Field(() => String)
-    attributeCategoryId: string
+    SKUCategoryId: string
 }
 
 @ObjectType()
-export class ProductAttributeObject {
+export class ProductSKUObject {
     @Field(() => ID)
     ID: string
 
     @Field(() => String)
-    productName: string
+    productsku: string
 
     @Field(() => Boolean)
     status: boolean
 
     @Field(() => String)
-    attributeCategoryId: string
+    SKUCategoryId: string
 
     @Field(() => CategoryObject, { nullable: true })
-    attributeCategory: CategoryObject | null
+    SKUCategory: CategoryObject | null
 }

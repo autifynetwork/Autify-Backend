@@ -11,6 +11,10 @@ export class ProductListResolver {
     @Mutation(() => ProductListInput)
     async createProduct(
         @Arg('productName') productName: string,
+        @Arg('status', { nullable: true }) status: boolean,
+        @Arg('productDesc') productDesc: string,
+        @Arg('expiryDate') expiryDate: string,
+        @Arg('unit') unit: number
         @Arg('status', { nullable: true }) status: boolean
     ): Promise<ProductList> {
         let product_name = await prisma.productList.findFirst({
@@ -23,6 +27,9 @@ export class ProductListResolver {
                 data: {
                     productName,
                     status,
+                    productDesc,
+                    expiryDate,
+                    unit,
                     createdAt: new Date(),
                     updatedAt: new Date(),
                 },
@@ -35,6 +42,10 @@ export class ProductListResolver {
     async updateProduct(
         @Arg('productId') productId: string,
         @Arg('productName', { nullable: true }) productName: string,
+        @Arg('status', { nullable: true }) status: boolean,
+        @Arg('productDesc', { nullable: true }) productDesc: string,
+        @Arg('expiryDate', { nullable: true }) expiryDate: string,
+        @Arg('unit', { nullable: true }) unit: number
         @Arg('status', { nullable: true }) status: boolean
     ): Promise<ProductList> {
         const product = await prisma.productList.findUnique({
@@ -49,6 +60,9 @@ export class ProductListResolver {
                 data: {
                     productName,
                     status,
+                    productDesc,
+                    expiryDate,
+                    unit,
                     updatedAt: new Date(),
                 },
             })

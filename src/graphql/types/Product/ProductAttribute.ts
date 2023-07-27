@@ -7,7 +7,7 @@ export class ProductAttributeInput {
     ID: string
 
     @Field(() => String)
-    productName: string
+    attributeName: string
 
     @Field(() => Boolean)
     status: boolean
@@ -22,7 +22,7 @@ export class ProductAttributeObject {
     ID: string
 
     @Field(() => String)
-    productName: string
+    attributeName: string
 
     @Field(() => Boolean)
     status: boolean

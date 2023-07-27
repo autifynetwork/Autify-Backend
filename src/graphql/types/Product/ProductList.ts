@@ -1,4 +1,4 @@
-import { InputType, Field, ID, ObjectType } from 'type-graphql'
+import { InputType, Field, ID, ObjectType, Int } from 'type-graphql'
 
 @ObjectType()
 export class ProductListInput {
@@ -10,6 +10,15 @@ export class ProductListInput {
 
     @Field(() => Boolean)
     status: boolean
+
+    @Field(() => String)
+    productDesc: string
+
+    @Field(() => String)
+    expiryDate: string
+
+    @Field(() => Int)
+    unit: number
 }
 
 @ObjectType()
@@ -22,4 +31,13 @@ export class ProductListObject {
 
     @Field(() => Boolean)
     status: boolean
+
+    @Field(() => String)
+    productDesc: string
+
+    @Field(() => String)
+    expiryDate: string
+
+    @Field(() => Int)
+    unit: number
 }

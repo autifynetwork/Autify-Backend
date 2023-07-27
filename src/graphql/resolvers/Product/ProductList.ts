@@ -15,6 +15,7 @@ export class ProductListResolver {
         @Arg('productDesc') productDesc: string,
         @Arg('expiryDate') expiryDate: string,
         @Arg('unit') unit: number
+        @Arg('status', { nullable: true }) status: boolean
     ): Promise<ProductList> {
         let product_name = await prisma.productList.findFirst({
             where: { productName },
@@ -45,6 +46,7 @@ export class ProductListResolver {
         @Arg('productDesc', { nullable: true }) productDesc: string,
         @Arg('expiryDate', { nullable: true }) expiryDate: string,
         @Arg('unit', { nullable: true }) unit: number
+        @Arg('status', { nullable: true }) status: boolean
     ): Promise<ProductList> {
         const product = await prisma.productList.findUnique({
             where: { id: productId },

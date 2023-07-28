@@ -8,6 +8,7 @@ import { CategoryResolver } from '@graphql/resolvers/categorySectionResolvers/Ca
 import { SubCategoryResolver } from '@graphql/resolvers/categorySectionResolvers/SubCategory'
 import { ProductListResolver } from '@graphql/resolvers/Product/ProductList'
 import { ProductAttributeResolver } from '@graphql/resolvers/Product/ProductAttribute'
+import { ProductSKUResolver } from '@graphql/resolvers/Product/ProductSKU'
 
 const getSchema = async () => {
     const schema = await buildSchema({
@@ -17,6 +18,7 @@ const getSchema = async () => {
             SubCategoryResolver,
             ProductListResolver,
             ProductAttributeResolver,
+            ProductSKUResolver,
         ],
     })
     return schema

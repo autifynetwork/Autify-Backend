@@ -14,7 +14,14 @@ export class ProductListResolver {
         @Arg('status', { nullable: true }) status: boolean,
         @Arg('productDesc') productDesc: string,
         @Arg('expiryDate') expiryDate: string,
-        @Arg('unit') unit: number
+        @Arg('unit') unit: number,
+        @Arg('materialUsed', { nullable: true }) materialUsed: string,
+        @Arg('location', { nullable: true }) location: string,
+        @Arg('ManufacturingDeatils', { nullable: true })
+        ManufacturingDeatils: string,
+        @Arg('attributeId', { nullable: true }) attributeId: string,
+        @Arg('SKU', { nullable: true }) SKU: string,
+        @Arg('SpecialFeatures', { nullable: true }) SpecialFeatures: string
     ): Promise<ProductList> {
         let product_name = await prisma.productList.findFirst({
             where: { productName },
@@ -29,6 +36,12 @@ export class ProductListResolver {
                     productDesc,
                     expiryDate,
                     unit,
+                    materialUsed,
+                    location,
+                    ManufacturingDeatils,
+                    attributeId,
+                    SKU,
+                    SpecialFeatures,
                     createdAt: new Date(),
                     updatedAt: new Date(),
                 },
@@ -44,7 +57,13 @@ export class ProductListResolver {
         @Arg('status', { nullable: true }) status: boolean,
         @Arg('productDesc', { nullable: true }) productDesc: string,
         @Arg('expiryDate', { nullable: true }) expiryDate: string,
-        @Arg('unit', { nullable: true }) unit: number
+        @Arg('unit', { nullable: true }) unit: number,
+        @Arg('materialUsed', { nullable: true }) materialUsed: string,
+        @Arg('location', { nullable: true }) location: string,
+        @Arg('ManufacturingDeatils', { nullable: true })
+        ManufacturingDeatils: string,
+        @Arg('attributeId', { nullable: true }) attributeId: string,
+        @Arg('SKU', { nullable: true }) SKU: string
     ): Promise<ProductList> {
         const product = await prisma.productList.findUnique({
             where: { id: productId },
@@ -61,6 +80,11 @@ export class ProductListResolver {
                     productDesc,
                     expiryDate,
                     unit,
+                    materialUsed,
+                    location,
+                    ManufacturingDeatils,
+                    attributeId,
+                    SKU,
                     updatedAt: new Date(),
                 },
             })

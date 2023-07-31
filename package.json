@@ -6,11 +6,12 @@
     "private": true,
     "scripts": {
         "tsc-check": "tsc --noEmit && tsc --noEmit --skipLibCheck",
-        "dev": "nodemon -V -e ts,graphql -w ./src -x yarn run start",
+        "dev": "concurrently \"npx prisma studio\" \"nodemon -V -e ts,graphql -w ./src -x yarn run start\" \"open http://localhost:4000/graphql\"",
         "start": "yarn build && node lib/servers/graphql-main.js | pino-pretty -c -l",
         "build": "tsc --skipLibCheck && tscpaths -p tsconfig.json -s ./src -o ./lib",
         "eslint-check": "eslint \"{src,test}/**/*.ts\"",
-        "eslint-fix": "eslint \"{src,test}/**/*.ts\" --fix"
+        "eslint-fix": "eslint \"{src,test}/**/*.ts\" --fix",
+        "fakegen":"ts-node src/services/prisma.ts"
     },
     "engines": {
         "node": "18"
@@ -42,14 +43,18 @@
         "@types/node": "^18.11.18",
         "@typescript-eslint/eslint-plugin": "^5.48.1",
         "@typescript-eslint/parser": "^5.48.1",
+        "concurrently": "^8.2.0",
         "eslint": "^8.31.0",
         "eslint-config-prettier": "^8.6.0",
         "eslint-plugin-import": "^2.26.0",
         "eslint-plugin-prettier": "^4.2.1",
         "nodemon": "^2.0.20",
+        "open": "^9.1.0",
         "pino-pretty": "^9.1.1",
         "prettier": "^2.8.2",
         "prisma": "5.0.0",
+        "prisma-generator-fake-data": "^0.10.0",
+        "ts-node": "^10.9.1",
         "tsc": "^2.0.4",
         "tscpaths": "^0.0.9",
         "typescript": "^4.9.4"

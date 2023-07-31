@@ -2,6 +2,11 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator custom_generator {
+    provider = "prisma-generator-fake-data"
+    output   = "../types/fake-data.ts"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -10,7 +15,7 @@ datasource db {
 model Brand {
   id        String   @id @default(cuid())
   email     String   @unique
-  name      String?
+  name      String
   whitelist Boolean  @default(false)
   vendors   Brand[]  @relation("VendorBrand")
   vendorOf  Brand[]  @relation("VendorBrand")
@@ -41,24 +46,43 @@ model SubCategory {
 }
 
 model ProductList {
-  id          String   @id @default(cuid())
-  productName String
-  status      Boolean  @default(true)
-  productDesc String
-  unit        Int
-  expiryDate  String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id                   String           @id @default(cuid())
+  productName          String
+  status               Boolean          @default(true)
+  productDesc          String
+  unit                 Int
+  expiryDate           String
+  materialUsed         String
+  location             String
+  ManufacturingDeatils String
+  certs                CERT[]
+  ProductAttribute     ProductAttribute @relation(fields: [attributeId], references: [id])
+  attributeId          String           @unique
+  SKU                  String
+  SpecialFeatures      String
+  createdAt            DateTime         @default(now())
+  updatedAt            DateTime         @updatedAt
+}
+
+model CERT {
+  id            String       @id @default(cuid())
+  certName      String
+  issuedBy      String
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  ProductList   ProductList? @relation(fields: [productListId], references: [id])
+  productListId String
 }
 
 model ProductAttribute {
-  id                  String   @id @default(cuid())
+  id                  String       @id @default(cuid())
   attributeName       String
-  status              Boolean  @default(true)
-  attributeCategory   Category @relation(fields: [attributeCategoryId], references: [id])
-  attributeCategoryId String   @unique
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
+  status              Boolean      @default(true)
+  attributeCategory   Category     @relation(fields: [attributeCategoryId], references: [id])
+  attributeCategoryId String       @unique
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+  ProductList         ProductList?
 }
 
 model ProductSKU {

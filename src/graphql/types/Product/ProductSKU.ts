@@ -4,7 +4,7 @@ import { CategoryObject } from '@graphql/types/CategorySectionTypes/Category'
 @ObjectType()
 export class ProductSKUInput {
     @Field(() => ID)
-    ID: string
+    id: string
 
     @Field(() => String)
     productsku: string
@@ -19,7 +19,7 @@ export class ProductSKUInput {
 @ObjectType()
 export class ProductSKUObject {
     @Field(() => ID)
-    ID: string
+    id: string
 
     @Field(() => String)
     productsku: string

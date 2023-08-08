@@ -3,7 +3,7 @@ import { Field, ID, ObjectType, Int } from 'type-graphql'
 @ObjectType()
 export class ProductListInput {
     @Field(() => ID)
-    ID: string
+    id: string
 
     @Field(() => String)
     productName: string
@@ -34,6 +34,7 @@ export class ProductListInput {
 
     @Field(() => String)
     sku: string
+
     @Field(() => String)
     specialFeature: string
 
@@ -44,7 +45,7 @@ export class ProductListInput {
 @ObjectType()
 export class ProductListObject {
     @Field(() => ID)
-    ID: string
+    id: string
 
     @Field(() => String)
     productName: string
@@ -60,4 +61,25 @@ export class ProductListObject {
 
     @Field(() => Int)
     unit: number
+
+    @Field(() => String)
+    materialUsed: string
+
+    @Field(() => String)
+    location: string
+
+    @Field(() => String)
+    manfactDetail: string
+
+    @Field(() => String)
+    attributes: string
+
+    @Field(() => String)
+    sku: string
+
+    @Field(() => String)
+    specialFeature: string
+
+    @Field(() => String)
+    cartificate: string
 }

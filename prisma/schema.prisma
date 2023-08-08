@@ -78,13 +78,56 @@ model ProductSKU {
 }
 
 model Profile {
-  id        String @id @default(cuid())
+  id        String   @id @default(cuid())
   firstName String
   lastName  String
-  email     String @unique
+  email     String   @unique
   phone     String?
   bName     String?
   bEmail    String?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ReadPermission {
+  id               String  @id @default(cuid())
+  categorySetup    Boolean?
+  categories       Boolean?
+  subCategories    Boolean?
+  productSetup     Boolean?
+  productList      Boolean?
+  productAttribute Boolean?
+  productSKU       Boolean?
+  userManagement   Boolean?
+  vendorSetup      Boolean?
+  vendorRoles      Boolean?
+  orderManagement  Boolean?
+}
+model WritePermission {
+  id               String  @id @default(cuid())
+  categorySetup    Boolean?
+  categories       Boolean?
+  subCategories    Boolean?
+  productSetup     Boolean?
+  productList      Boolean?
+  productAttribute Boolean?
+  productSKU       Boolean?
+  userManagement   Boolean?
+  vendorSetup      Boolean?
+  vendorRoles      Boolean?
+  orderManagement  Boolean?
+}
+model StatusPermission {
+  id               String  @id @default(cuid())
+  categorySetup    Boolean?
+  categories       Boolean?
+  subCategories    Boolean?
+  productSetup     Boolean?
+  productList      Boolean?
+  productAttribute Boolean?
+  productSKU       Boolean?
+  userManagement   Boolean?
+  vendorSetup      Boolean?
+  vendorRoles      Boolean?
+  orderManagement  Boolean?
 }

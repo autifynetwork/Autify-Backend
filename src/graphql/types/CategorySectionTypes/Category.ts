@@ -8,9 +8,6 @@ export class CreateCategoryInput {
     @Field(() => String)
     categoryName: string
 
-    @Field(() => String)
-    categoryImgUrl: string
-
     @Field(() => Boolean)
     status: boolean
 }
@@ -22,9 +19,6 @@ export class CategoryObject {
 
     @Field(() => String)
     categoryName: string
-
-    @Field(() => String)
-    categoryImgUrl: string
 
     @Field(() => Boolean)
     status: boolean

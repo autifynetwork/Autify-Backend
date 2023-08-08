@@ -12,9 +12,16 @@ export class ProductListResolver {
     async createProduct(
         @Arg('productName') productName: string,
         @Arg('status', { nullable: true }) status: boolean,
-        @Arg('productDesc') productDesc: string,
-        @Arg('expiryDate') expiryDate: string,
-        @Arg('unit') unit: number
+        @Arg('productDesc', { nullable: true }) productDesc: string,
+        @Arg('expiryDate', { nullable: true }) expiryDate: string,
+        @Arg('unit', { nullable: true }) unit: number,
+        @Arg('materialUsed', { nullable: true }) materialUsed: string,
+        @Arg('location', { nullable: true }) location: string,
+        @Arg('manfactDetail', { nullable: true }) manfactDetail: string,
+        @Arg('attributes', { nullable: true }) attributes: string,
+        @Arg('sku', { nullable: true }) sku: string,
+        @Arg('specialFeature', { nullable: true }) specialFeature: string,
+        @Arg('cartificate', { nullable: true }) cartificate: string
     ): Promise<ProductList> {
         let product_name = await prisma.productList.findFirst({
             where: { productName },
@@ -29,6 +36,13 @@ export class ProductListResolver {
                     productDesc,
                     expiryDate,
                     unit,
+                    materialUsed,
+                    location,
+                    manfactDetail,
+                    attributes,
+                    sku,
+                    specialFeature,
+                    cartificate,
                     createdAt: new Date(),
                     updatedAt: new Date(),
                 },
@@ -44,7 +58,14 @@ export class ProductListResolver {
         @Arg('status', { nullable: true }) status: boolean,
         @Arg('productDesc', { nullable: true }) productDesc: string,
         @Arg('expiryDate', { nullable: true }) expiryDate: string,
-        @Arg('unit', { nullable: true }) unit: number
+        @Arg('unit', { nullable: true }) unit: number,
+        @Arg('materialUsed', { nullable: true }) materialUsed: string,
+        @Arg('location', { nullable: true }) location: string,
+        @Arg('manfactDetail', { nullable: true }) manfactDetail: string,
+        @Arg('attributes', { nullable: true }) attributes: string,
+        @Arg('sku', { nullable: true }) sku: string,
+        @Arg('specialFeature', { nullable: true }) specialFeature: string,
+        @Arg('cartificate', { nullable: true }) cartificate: string
     ): Promise<ProductList> {
         const product = await prisma.productList.findUnique({
             where: { id: productId },
@@ -61,6 +82,13 @@ export class ProductListResolver {
                     productDesc,
                     expiryDate,
                     unit,
+                    materialUsed,
+                    location,
+                    manfactDetail,
+                    attributes,
+                    sku,
+                    specialFeature,
+                    cartificate,
                     updatedAt: new Date(),
                 },
             })

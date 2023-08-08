@@ -21,7 +21,6 @@ model Brand {
 model Category {
   id             String             @id @default(cuid())
   categoryName   String
-  categoryImgUrl String
   subCategories  SubCategory[]
   attributes     ProductAttribute[]
   SKUs           ProductSKU[]

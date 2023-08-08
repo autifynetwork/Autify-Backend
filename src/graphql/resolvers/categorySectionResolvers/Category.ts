@@ -17,24 +17,17 @@ export class CategoryResolver {
     @Mutation(() => CreateCategoryInput)
     async createCategory(
         @Arg('categoryName') categoryName: string,
-        @Arg('categoryImgUrl') categoryImgUrl: string,
         @Arg('status', { nullable: true }) status: boolean
     ): Promise<Category> {
         let category_name = await prisma.category.findFirst({
             where: { categoryName },
         })
-        const category_img_url = await prisma.category.findFirst({
-            where: { categoryImgUrl },
-        })
-        if (category_img_url?.categoryImgUrl) {
-            throw new Error(`category link already exists`)
-        } else if (category_name?.categoryName) {
+        if (category_name?.categoryName) {
             throw new Error(`category name already exists`)
         } else {
             category_name = await prisma.category.create({
                 data: {
                     categoryName,
-                    categoryImgUrl,
                     status,
                     createdAt: new Date(),
                     updatedAt: new Date(),
@@ -63,7 +56,6 @@ export class CategoryResolver {
             where: { id: categoryId },
             data: {
                 categoryName: categoryName || category.categoryName,
-                categoryImgUrl: categoryImgUrl || category.categoryImgUrl,
                 status: status !== undefined ? status : category.status,
                 updatedAt: new Date(),
             },

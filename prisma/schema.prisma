@@ -19,14 +19,14 @@ model Brand {
 }
 
 model Category {
-  id             String             @id @default(cuid())
-  categoryName   String
-  subCategories  SubCategory[]
-  attributes     ProductAttribute[]
-  SKUs           ProductSKU[]
-  status         Boolean            @default(true)
-  createdAt      DateTime           @default(now())
-  updatedAt      DateTime           @updatedAt
+  id            String             @id @default(cuid())
+  categoryName  String
+  subCategories SubCategory[]
+  attributes    ProductAttribute[]
+  SKUs          ProductSKU[]
+  status        Boolean            @default(true)
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
 }
 
 model SubCategory {
@@ -73,6 +73,18 @@ model ProductSKU {
   status        Boolean  @default(true)
   SKUCategory   Category @relation(fields: [SKUCategoryId], references: [id])
   SKUCategoryId String   @unique
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Profile {
+  id        String @id @default(cuid())
+  firstName String
+  lastName  String
+  email     String @unique
+  phone     String?
+  bName     String?
+  bEmail    String?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }

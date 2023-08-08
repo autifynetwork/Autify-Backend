@@ -1,4 +1,4 @@
-import { InputType, Field, ID, ObjectType, Int } from 'type-graphql'
+import { Field, ID, ObjectType, Int } from 'type-graphql'
 
 @ObjectType()
 export class ProductListInput {
@@ -19,6 +19,26 @@ export class ProductListInput {
 
     @Field(() => Int)
     unit: number
+
+    @Field(() => String)
+    materialUsed: string
+
+    @Field(() => String)
+    location: string
+
+    @Field(() => String)
+    manfactDetail: string
+
+    @Field(() => String)
+    attributes: string
+
+    @Field(() => String)
+    sku: string
+    @Field(() => String)
+    specialFeature: string
+
+    @Field(() => String)
+    cartificate: string
 }
 
 @ObjectType()

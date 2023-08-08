@@ -41,14 +41,21 @@ model SubCategory {
 }
 
 model ProductList {
-  id          String   @id @default(cuid())
-  productName String
-  status      Boolean  @default(true)
-  productDesc String
-  unit        Int
-  expiryDate  String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id             String   @id @default(cuid())
+  productName    String
+  status         Boolean  @default(true)
+  unit           Int
+  productDesc    String?
+  expiryDate     String?
+  materialUsed   String?
+  location       String?
+  manfactDetail  String?
+  attributes     String?
+  sku            String?
+  specialFeature String?
+  cartificate    String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }
 
 model ProductAttribute {

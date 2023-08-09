@@ -1,4 +1,4 @@
-import { Arg, Mutation, Resolver } from 'type-graphql'
+import { Arg, Mutation, Query, Resolver } from 'type-graphql'
 
 import {
     PermissionReadInput,
@@ -72,6 +72,12 @@ export class PermissionReadResolver {
                 orderManagement,
             },
         })
+        return permission
+    }
+
+    @Query(() => [PermissionReadObject])
+    async getAllPermissionRead(): Promise<ReadPermission[]> {
+        const permission = await prisma.readPermission.findMany()
         return permission
     }
 }

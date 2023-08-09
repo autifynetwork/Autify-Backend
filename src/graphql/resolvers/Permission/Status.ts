@@ -1,4 +1,4 @@
-import { Arg, Mutation, Resolver } from 'type-graphql'
+import { Arg, Mutation, Query, Resolver } from 'type-graphql'
 
 import {
     PermissionStatusInput,
@@ -73,5 +73,12 @@ export class PermissionStatusResolver {
             },
         })
         return permission
+    }
+
+    // get all permissions
+    @Query(() => [PermissionStatusObject])
+    async getPermissions(): Promise<StatusPermission[]> {
+        const permissions = await prisma.statusPermission.findMany()
+        return permissions
     }
 }

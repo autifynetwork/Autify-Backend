@@ -14,12 +14,6 @@ export class BrandObject {
     @Field()
     whitelist: boolean
 
-    @Field(() => [BrandObject], { nullable: true })
-    vendors: BrandObject[]
-
-    @Field(() => [BrandObject], { nullable: true })
-    vendorOf: BrandObject[]
-
     @Field()
     createdAt: Date
 

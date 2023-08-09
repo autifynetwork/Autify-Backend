@@ -1,4 +1,4 @@
-import { Arg, Mutation, Resolver } from 'type-graphql'
+import { Query, Arg, Mutation, Resolver } from 'type-graphql'
 
 import {
     PermissionWriteInput,
@@ -72,6 +72,13 @@ export class PermissionWriteResolver {
                 orderManagement,
             },
         })
+        return permission
+    }
+
+    // get all permission
+    @Query(() => [PermissionWriteObject])
+    async getPermissionWrite(): Promise<WritePermission[]> {
+        const permission = await prisma.writePermission.findMany()
         return permission
     }
 }

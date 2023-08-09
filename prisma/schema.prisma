@@ -12,10 +12,27 @@ model Brand {
   email     String   @unique
   name      String?
   whitelist Boolean  @default(false)
-  vendors   Brand[]  @relation("VendorBrand")
-  vendorOf  Brand[]  @relation("VendorBrand")
+  vendors   Vendor[] @relation("VendorBrand")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Vendor {
+  id               String           @id @default(cuid())
+  vendorName       String
+  vendorPhone      String           @unique
+  contract         String?
+  vendorEntityName String?
+  vendorTaxDetails String?
+  AdditionalInfo   String?
+  userName         String           @unique
+  password         String
+  brand            Brand            @relation("VendorBrand", fields: [brandId], references: [id])
+  brandId          String           @unique
+  billOfMat        BillofMaterial[]
+  whiteList        Boolean?         @default(false)
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
 }
 
 model Category {
@@ -90,7 +107,7 @@ model Profile {
 }
 
 model ReadPermission {
-  id               String  @id @default(cuid())
+  id               String   @id @default(cuid())
   categorySetup    Boolean?
   categories       Boolean?
   subCategories    Boolean?
@@ -102,9 +119,11 @@ model ReadPermission {
   vendorSetup      Boolean?
   vendorRoles      Boolean?
   orderManagement  Boolean?
+  role             Role[]
 }
+
 model WritePermission {
-  id               String  @id @default(cuid())
+  id               String   @id @default(cuid())
   categorySetup    Boolean?
   categories       Boolean?
   subCategories    Boolean?
@@ -116,9 +135,11 @@ model WritePermission {
   vendorSetup      Boolean?
   vendorRoles      Boolean?
   orderManagement  Boolean?
+  role             Role[]
 }
+
 model StatusPermission {
-  id               String  @id @default(cuid())
+  id               String   @id @default(cuid())
   categorySetup    Boolean?
   categories       Boolean?
   subCategories    Boolean?
@@ -130,4 +151,31 @@ model StatusPermission {
   vendorSetup      Boolean?
   vendorRoles      Boolean?
   orderManagement  Boolean?
+  role             Role[]
+}
+
+model Role {
+  id                 String            @id @default(cuid())
+  roleName           String
+  readPermission     ReadPermission?   @relation(fields: [readPermissionId], references: [id])
+  readPermissionId   String?           @unique
+  writePermission    WritePermission?  @relation(fields: [writePermissionId], references: [id])
+  writePermissionId  String?           @unique
+  statusPermission   StatusPermission? @relation(fields: [statusPermissionId], references: [id])
+  statusPermissionId String?           @unique
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+}
+
+model BillofMaterial {
+  id           String    @id @default(cuid())
+  title        String
+  description  String?
+  vendor       Vendor    @relation(fields: [vendorId], references: [id])
+  vendorId     String    @unique
+  dueDate      DateTime?
+  instructions String?
+  remarks      String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
 }

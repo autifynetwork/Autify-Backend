@@ -38,7 +38,8 @@ const startServer = async () => {
     const apolloServer = new ApolloServer({
         schema: await getSchema(),
         introspection: apolloConfig.introspection,
-        plugins: apolloPlugins
+        plugins: apolloPlugins,
+        cache: 'bounded'
     })
 
     if (isProd)

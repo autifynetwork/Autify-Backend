@@ -1,5 +1,5 @@
 import { Field, ID, ObjectType } from 'type-graphql'
-import { CategoryObject } from '@graphql/types/CategorySectionTypes/Category'
+import { CategoryObject } from '@graphql/types/categorySectionTypes/Category'
 
 @ObjectType()
 export class ProductSKUInput {

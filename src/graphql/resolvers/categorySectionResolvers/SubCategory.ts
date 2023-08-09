@@ -3,7 +3,7 @@ import { Query, Arg, Mutation, Resolver } from 'type-graphql'
 import {
     CreateSubCategoryInput,
     SubCategoryObject,
-} from '@graphql/types/CategorySectionTypes/SubCategory'
+} from '@graphql/types/categorySectionTypes/SubCategory'
 import prisma from '@services/prisma'
 
 @Resolver()

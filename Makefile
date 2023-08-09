@@ -1,16 +1,16 @@
 deps:
 	direnv reload
 	./update-env-ip.sh
-	docker compose -f docker-compose.yml up  -d
+	cd .docker && docker compose up db -d
 
 stop:
-	docker-compose -f docker-compose.yml down
+	cd .docker && docker compose down
 
 down: destroy
 destroy:
-	docker compose -f docker-compose.yml down -v
-	docker compose -f docker-compose.yml rm -f
+	cd .docker && docker compose down -v
+	cd .docker && docker compose -f docker-compose.yml rm -f
 logs: 
-	docker compose -f docker-compose.yml logs -f
+	cd .docker && docker compose -f docker-compose.yml logs -f
 
 .PHONY: deps stop down destroy logs

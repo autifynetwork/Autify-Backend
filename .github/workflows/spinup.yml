@@ -1,7 +1,9 @@
 name: "Spinup Server"
+
 on:
-  pull_request:
-    branches: [ '*' ]
+    push:
+      branches:
+        - 'main'
 
 jobs:
   check-code:

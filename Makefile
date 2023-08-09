@@ -1,7 +1,8 @@
 deps:
 	direnv reload
-	./update-env-ip.sh
 	cd .docker && docker compose up db -d
+	sleep 5
+	yarn migrate
 
 stop:
 	cd .docker && docker compose down
@@ -9,8 +10,8 @@ stop:
 down: destroy
 destroy:
 	cd .docker && docker compose down -v
-	cd .docker && docker compose -f docker-compose.yml rm -f
-logs: 
-	cd .docker && docker compose -f docker-compose.yml logs -f
+
+logs:
+	cd .docker && docker compose logs -f
 
 .PHONY: deps stop down destroy logs

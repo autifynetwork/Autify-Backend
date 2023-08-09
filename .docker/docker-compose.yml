@@ -24,7 +24,7 @@ services:
       - intranet
 
 volumes:
-  db_data:
+  db-data:
 
 networks:
   intranet:

@@ -10,7 +10,8 @@
         "start": "yarn build && node lib/servers/graphql-main.js | pino-pretty -c -l",
         "build": "tsc --skipLibCheck && tscpaths -p tsconfig.json -s ./src -o ./lib",
         "eslint-check": "eslint \"{src,test}/**/*.ts\"",
-        "eslint-fix": "eslint \"{src,test}/**/*.ts\" --fix"
+        "eslint-fix": "eslint \"{src,test}/**/*.ts\" --fix",
+        "migrate": ". ./.envrc && npx prisma migrate deploy"
     },
     "engines": {
         "node": "18"

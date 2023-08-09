@@ -43,6 +43,6 @@ services:
     env_file:
       - .env.dev
     command: >
-        sh -c "npx prisma migrate deploy --name init && yarn dev"
+        sh -c "npx prisma migrate dev --name init && yarn dev"
 volumes:
   db_data:

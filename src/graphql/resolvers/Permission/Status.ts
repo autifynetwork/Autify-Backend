@@ -2,7 +2,7 @@ import { Arg, Mutation, Query, Resolver } from 'type-graphql'
 
 import {
     PermissionStatusInput,
-    PermissionStatusObject,
+    PermissionStatusObject
 } from '@graphql/types/Permission/Status'
 import { StatusPermission } from '@prisma/client'
 import prisma from '@services/prisma'
@@ -35,8 +35,8 @@ export class PermissionStatusResolver {
                 userManagement,
                 vendorSetup,
                 vendorRoles,
-                orderManagement,
-            },
+                orderManagement
+            }
         })
         return permission
     }
@@ -69,8 +69,8 @@ export class PermissionStatusResolver {
                 userManagement,
                 vendorSetup,
                 vendorRoles,
-                orderManagement,
-            },
+                orderManagement
+            }
         })
         return permission
     }

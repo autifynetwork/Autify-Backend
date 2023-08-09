@@ -52,13 +52,13 @@ export class BrandResolver {
                     whitelist,
                     name,
                     createdAt: new Date(),
-                    updatedAt: new Date(),
-                },
+                    updatedAt: new Date()
+                }
             })
         } else {
             brandEmail = await prisma.brand.update({
                 where: { email },
-                data: { whitelist, name, updatedAt: new Date() },
+                data: { whitelist, name, updatedAt: new Date() }
             })
         }
         return brandEmail

@@ -35,8 +35,7 @@
             "error",
             {
                 "semi": false,
-                "trailingComma": "all",
-                "printWidth": 90,
+                "trailingComma": "none",
                 "quoteProps": "consistent",
                 "singleQuote": true,
                 "tabWidth": 4,
@@ -44,7 +43,7 @@
                 "bracketSpacing": true,
                 "arrowParens": "always",
                 "proseWrap": "preserve",
-                "endOfLine": "lf",
+                "endOfLine": "lf"
             }
         ],
 

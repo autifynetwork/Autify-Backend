@@ -2,7 +2,7 @@ import { Arg, Mutation, Query, Resolver } from 'type-graphql'
 
 import {
     CreateVendorInput,
-    CreateVendorObject,
+    CreateVendorObject
 } from '@graphql/types/Entity/Vendor'
 import { Vendor } from '@prisma/client'
 import prisma from '@services/prisma'
@@ -13,7 +13,7 @@ export class VendorResolver {
     @Query(() => String)
     async checkVendor(@Arg('vendorPhone') vendorPhone: string) {
         const checkVendor = await prisma.vendor.findFirst({
-            where: { vendorPhone },
+            where: { vendorPhone }
         })
         try {
             if (!checkVendor) {
@@ -41,7 +41,7 @@ export class VendorResolver {
     ): Promise<Vendor> {
         const hashedPassword = await bcrypt.hash(password, 10)
         let creatVendor = await prisma.vendor.findUnique({
-            where: { vendorPhone },
+            where: { vendorPhone }
         })
         if (!creatVendor) {
             creatVendor = await prisma.vendor.create({
@@ -57,8 +57,8 @@ export class VendorResolver {
                     password: hashedPassword,
                     brandId,
                     createdAt: new Date(),
-                    updatedAt: new Date(),
-                },
+                    updatedAt: new Date()
+                }
             })
         }
         return creatVendor
@@ -92,8 +92,8 @@ export class VendorResolver {
                     AdditionalInfo,
                     userName,
                     brandId,
-                    updatedAt: new Date(),
-                },
+                    updatedAt: new Date()
+                }
             })
         }
         return updateVendor
@@ -110,7 +110,7 @@ export class VendorResolver {
     @Query(() => [CreateVendorObject])
     async getAllVendors(): Promise<Vendor[]> {
         const allVendors = await prisma.vendor.findMany({
-            include: { brand: true, billOfMat: true },
+            include: { brand: true, billOfMat: true }
         })
         return allVendors
     }
@@ -120,7 +120,7 @@ export class VendorResolver {
     async getVendor(@Arg('id') id: string): Promise<Vendor> {
         const vendor = await prisma.vendor.findUnique({
             where: { id },
-            include: { brand: true, billOfMat: true },
+            include: { brand: true, billOfMat: true }
         })
         if (!vendor) {
             throw new Error('Vendor not found')

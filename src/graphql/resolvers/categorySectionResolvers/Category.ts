@@ -1,7 +1,7 @@
 import { Query, Arg, Mutation, Resolver } from 'type-graphql'
 import {
     CreateCategoryInput,
-    CategoryObject,
+    CategoryObject
 } from '@graphql/types/categorySectionTypes/Category'
 import { Category } from '@prisma/client'
 import prisma from '@services/prisma'
@@ -20,7 +20,7 @@ export class CategoryResolver {
         @Arg('status', { nullable: true }) status: boolean
     ): Promise<Category> {
         let category_name = await prisma.category.findFirst({
-            where: { categoryName },
+            where: { categoryName }
         })
         if (category_name?.categoryName) {
             throw new Error(`category name already exists`)
@@ -30,8 +30,8 @@ export class CategoryResolver {
                     categoryName,
                     status,
                     createdAt: new Date(),
-                    updatedAt: new Date(),
-                },
+                    updatedAt: new Date()
+                }
             })
         }
         return category_name
@@ -46,7 +46,7 @@ export class CategoryResolver {
         @Arg('status', { nullable: true }) status: boolean
     ): Promise<Category> {
         const category = await prisma.category.findUnique({
-            where: { id: categoryId },
+            where: { id: categoryId }
         })
 
         if (!category) {
@@ -57,8 +57,8 @@ export class CategoryResolver {
             data: {
                 categoryName: categoryName || category.categoryName,
                 status: status !== undefined ? status : category.status,
-                updatedAt: new Date(),
-            },
+                updatedAt: new Date()
+            }
         })
         return updatedCategory
     }
@@ -69,13 +69,13 @@ export class CategoryResolver {
         @Arg('categoryId') categoryId: string
     ): Promise<Category> {
         const category = await prisma.category.findUnique({
-            where: { id: categoryId },
+            where: { id: categoryId }
         })
         if (!category) {
             throw new Error(`category not found`)
         }
         const deletedCategory = await prisma.category.delete({
-            where: { id: categoryId },
+            where: { id: categoryId }
         })
         return deletedCategory
     }

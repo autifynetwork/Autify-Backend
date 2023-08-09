@@ -1,4 +1,5 @@
 import { Field, ID, ObjectType } from 'type-graphql'
+
 import { CategoryObject } from './Category'
 
 @ObjectType()

@@ -1,7 +1,7 @@
 import { Arg, Mutation, Query, Resolver } from 'type-graphql'
 import {
     ProductSKUInput,
-    ProductSKUObject,
+    ProductSKUObject
 } from '@graphql/types/Product/ProductSKU'
 import { ProductSKU } from '@prisma/client'
 import prisma from '@services/prisma'
@@ -16,7 +16,7 @@ export class ProductSKUResolver {
         @Arg('SKUCategoryId') SKUCategoryId: string
     ): Promise<ProductSKU> {
         let product_sku = await prisma.productSKU.findFirst({
-            where: { productsku },
+            where: { productsku }
         })
         if (product_sku?.productsku) {
             throw new Error(`product sku already exists`)
@@ -27,8 +27,8 @@ export class ProductSKUResolver {
                     status,
                     SKUCategoryId,
                     createdAt: new Date(),
-                    updatedAt: new Date(),
-                },
+                    updatedAt: new Date()
+                }
             })
         }
         return product_sku
@@ -42,20 +42,20 @@ export class ProductSKUResolver {
         @Arg('SKUCategoryId', { nullable: true }) SKUCategoryId: string
     ): Promise<ProductSKU> {
         const product = await prisma.productSKU.findUnique({
-            where: { id: SKUCategoryId },
+            where: { id: SKUCategoryId }
         })
 
         if (!product) {
             throw new Error(`product not found`)
         } else {
-            return await prisma.productSKU.update({
+            return prisma.productSKU.update({
                 where: { id: SKUCategoryId },
                 data: {
                     productsku,
                     status,
                     SKUCategoryId,
-                    updatedAt: new Date(),
-                },
+                    updatedAt: new Date()
+                }
             })
         }
     }
@@ -64,14 +64,14 @@ export class ProductSKUResolver {
     @Mutation(() => ProductSKUObject)
     async deleteProductSKU(@Arg('SKUCategoryId') SKUCategoryId: string) {
         const product = await prisma.productSKU.findUnique({
-            where: { id: SKUCategoryId },
+            where: { id: SKUCategoryId }
         })
 
         if (!product) {
             throw new Error(`product not found`)
         } else {
-            return await prisma.productSKU.delete({
-                where: { id: SKUCategoryId },
+            return prisma.productSKU.delete({
+                where: { id: SKUCategoryId }
             })
         }
     }
@@ -79,14 +79,14 @@ export class ProductSKUResolver {
     // get all product sku
     @Query(() => [ProductSKUObject])
     async getAllProductSKU(): Promise<ProductSKU[]> {
-        return await prisma.productSKU.findMany()
+        return prisma.productSKU.findMany()
     }
 
     //find product sku by id
     @Query(() => ProductSKUObject)
     async getProductSKUById(@Arg('SKUCategoryId') SKUCategoryId: string) {
         const product = await prisma.productSKU.findUnique({
-            where: { id: SKUCategoryId },
+            where: { id: SKUCategoryId }
         })
 
         if (!product) {

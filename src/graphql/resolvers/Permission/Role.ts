@@ -22,8 +22,8 @@ export class RoleResolver {
                 writePermissionId,
                 statusPermissionId,
                 createdAt: new Date(),
-                updatedAt: new Date(),
-            },
+                updatedAt: new Date()
+            }
         })
         return createRole
     }

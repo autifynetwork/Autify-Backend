@@ -6,37 +6,37 @@ export class PermissionStatusInput {
     id: string
 
     @Field(() => Boolean)
-    categorySetup: Boolean
+    categorySetup: boolean
 
     @Field(() => Boolean)
-    categories: Boolean
+    categories: boolean
 
     @Field(() => Boolean)
-    subCategories: Boolean
+    subCategories: boolean
 
     @Field(() => Boolean)
-    productSetup: Boolean
+    productSetup: boolean
 
     @Field(() => Boolean)
-    productList: Boolean
+    productList: boolean
 
     @Field(() => Boolean)
-    productAttribute: Boolean
+    productAttribute: boolean
 
     @Field(() => Boolean)
-    productSKU: Boolean
+    productSKU: boolean
 
     @Field(() => Boolean)
-    userManagement: Boolean
+    userManagement: boolean
 
     @Field(() => Boolean)
-    vendorSetup: Boolean
+    vendorSetup: boolean
 
     @Field(() => Boolean)
-    vendorRoles: Boolean
+    vendorRoles: boolean
 
     @Field(() => Boolean)
-    orderManagement: Boolean
+    orderManagement: boolean
 }
 @ObjectType()
 export class PermissionStatusObject {
@@ -44,35 +44,35 @@ export class PermissionStatusObject {
     id: string
 
     @Field(() => Boolean)
-    categorySetup: Boolean
+    categorySetup: boolean
 
     @Field(() => Boolean)
-    categories: Boolean
+    categories: boolean
 
     @Field(() => Boolean)
-    subCategories: Boolean
+    subCategories: boolean
 
     @Field(() => Boolean)
-    productSetup: Boolean
+    productSetup: boolean
 
     @Field(() => Boolean)
-    productList: Boolean
+    productList: boolean
 
     @Field(() => Boolean)
-    productAttribute: Boolean
+    productAttribute: boolean
 
     @Field(() => Boolean)
-    productSKU: Boolean
+    productSKU: boolean
 
     @Field(() => Boolean)
-    userManagement: Boolean
+    userManagement: boolean
 
     @Field(() => Boolean)
-    vendorSetup: Boolean
+    vendorSetup: boolean
 
     @Field(() => Boolean)
-    vendorRoles: Boolean
+    vendorRoles: boolean
 
     @Field(() => Boolean)
-    orderManagement: Boolean
+    orderManagement: boolean
 }

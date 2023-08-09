@@ -2,7 +2,7 @@ import { Arg, Mutation, Query, Resolver } from 'type-graphql'
 
 import {
     PermissionReadInput,
-    PermissionReadObject,
+    PermissionReadObject
 } from '@graphql/types/Permission/Read'
 import { ReadPermission } from '@prisma/client'
 import prisma from '@services/prisma'
@@ -35,8 +35,8 @@ export class PermissionReadResolver {
                 userManagement,
                 vendorSetup,
                 vendorRoles,
-                orderManagement,
-            },
+                orderManagement
+            }
         })
         return permission
     }
@@ -69,8 +69,8 @@ export class PermissionReadResolver {
                 userManagement,
                 vendorSetup,
                 vendorRoles,
-                orderManagement,
-            },
+                orderManagement
+            }
         })
         return permission
     }

@@ -1,7 +1,7 @@
 import { Query, Arg, Mutation, Resolver } from 'type-graphql'
 import {
     CreateSubCategoryInput,
-    SubCategoryObject,
+    SubCategoryObject
 } from '@graphql/types/categorySectionTypes/SubCategory'
 import { SubCategory } from '@prisma/client'
 import prisma from '@services/prisma'
@@ -21,7 +21,7 @@ export class SubCategoryResolver {
         @Arg('status', { nullable: true }) status: boolean
     ): Promise<SubCategory> {
         const existingSubCategory = await prisma.subCategory.findFirst({
-            where: { subCategoryName },
+            where: { subCategoryName }
         })
         if (existingSubCategory?.subCategoryName) {
             throw new Error(`Subcategory name already exists`)
@@ -32,8 +32,8 @@ export class SubCategoryResolver {
                     categoryId,
                     status,
                     createdAt: new Date(),
-                    updatedAt: new Date(),
-                },
+                    updatedAt: new Date()
+                }
             })
 
             return subCategory
@@ -49,7 +49,7 @@ export class SubCategoryResolver {
         @Arg('status', { nullable: true }) status: boolean
     ): Promise<SubCategory> {
         const subCategory = await prisma.subCategory.findUnique({
-            where: { id: subCategoryId },
+            where: { id: subCategoryId }
         })
         if (!subCategory) {
             throw new Error(`Subcategory does not exist`)
@@ -60,8 +60,8 @@ export class SubCategoryResolver {
                     subCategoryName,
                     categoryId,
                     status,
-                    updatedAt: new Date(),
-                },
+                    updatedAt: new Date()
+                }
             })
 
             return updatedSubCategory
@@ -74,13 +74,13 @@ export class SubCategoryResolver {
         @Arg('subCategoryId') subCategoryId: string
     ): Promise<SubCategory> {
         const subCategory = await prisma.subCategory.findUnique({
-            where: { id: subCategoryId },
+            where: { id: subCategoryId }
         })
         if (!subCategory) {
             throw new Error(`Subcategory does not exist`)
         } else {
             const deletedSubCategory = await prisma.subCategory.delete({
-                where: { id: subCategoryId },
+                where: { id: subCategoryId }
             })
 
             return deletedSubCategory
@@ -91,7 +91,7 @@ export class SubCategoryResolver {
     @Query(() => [SubCategoryObject])
     async getAllSubCategories(): Promise<SubCategory[]> {
         const subCategories = await prisma.subCategory.findMany({
-            include: { mainCategory: true },
+            include: { mainCategory: true }
         })
         return subCategories
     }

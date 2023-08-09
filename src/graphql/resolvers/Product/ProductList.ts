@@ -1,7 +1,7 @@
 import { Arg, Mutation, Query, Resolver } from 'type-graphql'
 import {
     ProductListInput,
-    ProductListObject,
+    ProductListObject
 } from '@graphql/types/Product/ProductList'
 import { ProductList } from '@prisma/client'
 import prisma from '@services/prisma'
@@ -24,7 +24,7 @@ export class ProductListResolver {
         @Arg('cartificate', { nullable: true }) cartificate: string
     ): Promise<ProductList> {
         let product_name = await prisma.productList.findFirst({
-            where: { productName },
+            where: { productName }
         })
         if (product_name?.productName) {
             throw new Error(`product name already exists`)
@@ -44,8 +44,8 @@ export class ProductListResolver {
                     specialFeature,
                     cartificate,
                     createdAt: new Date(),
-                    updatedAt: new Date(),
-                },
+                    updatedAt: new Date()
+                }
             })
         }
         return product_name
@@ -68,13 +68,13 @@ export class ProductListResolver {
         @Arg('cartificate', { nullable: true }) cartificate: string
     ): Promise<ProductList> {
         const product = await prisma.productList.findUnique({
-            where: { id: productId },
+            where: { id: productId }
         })
 
         if (!product) {
             throw new Error(`product not found`)
         } else {
-            return await prisma.productList.update({
+            return prisma.productList.update({
                 where: { id: productId },
                 data: {
                     productName,
@@ -89,8 +89,8 @@ export class ProductListResolver {
                     sku,
                     specialFeature,
                     cartificate,
-                    updatedAt: new Date(),
-                },
+                    updatedAt: new Date()
+                }
             })
         }
     }
@@ -98,14 +98,14 @@ export class ProductListResolver {
     @Mutation(() => ProductListObject)
     async deleteProduct(@Arg('productId') productId: string) {
         const product = await prisma.productList.findUnique({
-            where: { id: productId },
+            where: { id: productId }
         })
 
         if (!product) {
             throw new Error(`product not found`)
         } else {
-            return await prisma.productList.delete({
-                where: { id: productId },
+            return prisma.productList.delete({
+                where: { id: productId }
             })
         }
     }
@@ -125,7 +125,7 @@ export class ProductListResolver {
     @Query(() => ProductListObject)
     async productById(@Arg('productId') productId: string) {
         const product = await prisma.productList.findUnique({
-            where: { id: productId },
+            where: { id: productId }
         })
 
         if (!product) {

@@ -26,8 +26,8 @@ export class ProfileResolver {
                     bName,
                     bEmail,
                     createdAt: new Date(),
-                    updatedAt: new Date(),
-                },
+                    updatedAt: new Date()
+                }
             })
         }
         return profileEmail
@@ -50,8 +50,8 @@ export class ProfileResolver {
                 phone,
                 bName,
                 bEmail,
-                updatedAt: new Date(),
-            },
+                updatedAt: new Date()
+            }
         })
         return profile
     }

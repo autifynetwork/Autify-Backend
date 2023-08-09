@@ -30,8 +30,8 @@ const getSchema = async () => {
             PermissionStatusResolver,
             PermissionReadResolver,
             VendorResolver,
-            RoleResolver,
-        ],
+            RoleResolver
+        ]
     })
     return schema
 }

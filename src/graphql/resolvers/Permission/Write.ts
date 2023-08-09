@@ -2,7 +2,7 @@ import { Query, Arg, Mutation, Resolver } from 'type-graphql'
 
 import {
     PermissionWriteInput,
-    PermissionWriteObject,
+    PermissionWriteObject
 } from '@graphql/types/Permission/Write'
 import { WritePermission } from '@prisma/client'
 import prisma from '@services/prisma'
@@ -35,8 +35,8 @@ export class PermissionWriteResolver {
                 userManagement,
                 vendorSetup,
                 vendorRoles,
-                orderManagement,
-            },
+                orderManagement
+            }
         })
         return permission
     }
@@ -69,8 +69,8 @@ export class PermissionWriteResolver {
                 userManagement,
                 vendorSetup,
                 vendorRoles,
-                orderManagement,
-            },
+                orderManagement
+            }
         })
         return permission
     }

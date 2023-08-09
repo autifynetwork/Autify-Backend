@@ -24,8 +24,8 @@ export class BomResolver {
                 instructions,
                 remarks,
                 createdAt: new Date(),
-                updatedAt: new Date(),
-            },
+                updatedAt: new Date()
+            }
         })
         return bomTitle
     }
@@ -49,8 +49,8 @@ export class BomResolver {
                 dueDate,
                 instructions,
                 remarks,
-                updatedAt: new Date(),
-            },
+                updatedAt: new Date()
+            }
         })
         return updatedBom
     }
@@ -58,7 +58,7 @@ export class BomResolver {
     @Mutation(() => BomObject)
     async deleteBom(@Arg('id') id: string): Promise<BillofMaterial> {
         const deletedBom = await prisma.billofMaterial.delete({
-            where: { id },
+            where: { id }
         })
         return deletedBom
     }
@@ -74,7 +74,7 @@ export class BomResolver {
     @Query(() => BomObject)
     async getBom(@Arg('id') id: string): Promise<BillofMaterial> {
         const bom = await prisma.billofMaterial.findUnique({
-            where: { id },
+            where: { id }
         })
         if (!bom) {
             throw new Error('BOM not found')

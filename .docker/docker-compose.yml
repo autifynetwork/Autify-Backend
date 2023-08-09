@@ -14,35 +14,17 @@ services:
       POSTGRES_DB: autifynetwork
     networks:
       - intranet
-
-  prisma:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    ports:
-      - "5555:5555"
-    depends_on:
-      - db
-    volumes:
-      - .:/app
-      - /app/node_modules
-    env_file:
-      - .env
-    command: npx prisma studio
-    links:
-      - db
+      
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    ports:
-      - "4000:4000"
-    depends_on:
-      - db
-    volumes:
-      - .:/app
-      - /app/node_modules
-    command: >
-        sh -c "npx prisma migrate dev --name init && yarn dev"
+    image: autifynetwork/app
+    container_name: app
+    environment:
+      DATABASE_URL: postgres://username:password@db:5432/autifynetwork
+    networks:
+      - intranet
+
 volumes:
   db_data:
+
+networks:
+  intranet:

@@ -12,7 +12,7 @@ import { ProductSKUResolver } from '@graphql/resolvers/Product/ProductSKU'
 import { ProfileResolver } from '@graphql/resolvers/Profile'
 import { PermissionWriteResolver } from '@graphql/resolvers/Permission/Write'
 import { PermissionStatusResolver } from '@graphql/resolvers/Permission/Status'
-import { PermissionReadResolver } from '@graphql/resolvers/Permission/Read'
+import { PermissionReadResolver } from '@graphql/resolvers/Permission/Read
 import { VendorResolver } from '@graphql/resolvers/Entity/Vendor'
 
 const getSchema = async () => {

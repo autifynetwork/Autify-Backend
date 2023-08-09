@@ -23,9 +23,3 @@ export class CategoryObject {
     @Field(() => Boolean)
     status: boolean
 }
-
-@ObjectType()
-export class imageUpload {
-    @Field(() => String)
-    url: string
-}

@@ -106,10 +106,25 @@ export class VendorResolver {
         return deleteVendor
     }
 
-    // Get all vendors
+    // Get all vendors with brands and boms
     @Query(() => [CreateVendorObject])
     async getAllVendors(): Promise<Vendor[]> {
-        const allVendors = await prisma.vendor.findMany()
+        const allVendors = await prisma.vendor.findMany({
+            include: { brand: true, billOfMat: true },
+        })
         return allVendors
+    }
+
+    // Get a vendor with id
+    @Query(() => CreateVendorObject)
+    async getVendor(@Arg('id') id: string): Promise<Vendor> {
+        const vendor = await prisma.vendor.findUnique({
+            where: { id },
+            include: { brand: true, billOfMat: true },
+        })
+        if (!vendor) {
+            throw new Error('Vendor not found')
+        }
+        return vendor
     }
 }

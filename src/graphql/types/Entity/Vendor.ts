@@ -1,4 +1,5 @@
 import { Field, ID, ObjectType } from 'type-graphql'
+import { BomObject } from '@graphql/types/OrderMgmt/Bom'
 
 @ObjectType()
 export class CreateVendorInput {
@@ -67,4 +68,7 @@ export class CreateVendorObject {
 
     @Field({ nullable: true })
     userName: string
+
+    @Field(() => BomObject, { nullable: true })
+    billOfMat: BomObject | null
 }

@@ -1,9 +1,9 @@
-import { SubCategory } from '@prisma/client'
 import { Query, Arg, Mutation, Resolver } from 'type-graphql'
 import {
     CreateSubCategoryInput,
     SubCategoryObject,
 } from '@graphql/types/categorySectionTypes/SubCategory'
+import { SubCategory } from '@prisma/client'
 import prisma from '@services/prisma'
 
 @Resolver()

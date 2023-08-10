@@ -15,7 +15,7 @@ FROM node:18
 COPY --from=BUILD_IMAGE /app/lib /app/lib
 COPY --from=BUILD_IMAGE /app/node_modules /app/node_modules
 COPY --from=BUILD_IMAGE /app/prisma /app/prisma
-COPY --from=BUILD_IMAGE /app/.docker/scripts /app/.docker/scripts
+COPY --from=BUILD_IMAGE start.sh .
 
 WORKDIR /app
 COPY ./*.js ./package.json ./tsconfig.json ./yarn.lock ./default.yaml ./

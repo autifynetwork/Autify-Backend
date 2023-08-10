@@ -15,7 +15,7 @@ FROM node:18
 COPY --from=BUILD_IMAGE /app/lib /app/lib
 COPY --from=BUILD_IMAGE /app/node_modules /app/node_modules
 COPY --from=BUILD_IMAGE /app/prisma /app/prisma
-COPY .env /app/.env
+COPY --from=BUILD_IMAGE /app/.env /app/.env
 COPY --from=BUILD_IMAGE /app/start.sh /app/start.sh
 
 WORKDIR /app

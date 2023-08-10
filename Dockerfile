@@ -20,5 +20,5 @@ COPY --from=BUILD_IMAGE /app/start.sh /app/start.sh
 WORKDIR /app
 COPY ./*.js ./package.json ./tsconfig.json ./yarn.lock ./default.yaml ./
 
-CMD ["./app/start.sh"]
+CMD ["/app/start.sh"]
 

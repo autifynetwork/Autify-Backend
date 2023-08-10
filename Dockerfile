@@ -15,11 +15,10 @@ FROM node:18
 COPY --from=BUILD_IMAGE /app/lib /app/lib
 COPY --from=BUILD_IMAGE /app/node_modules /app/node_modules
 COPY --from=BUILD_IMAGE /app/prisma /app/prisma
-COPY --from=BUILD_IMAGE /app/.env /app/.env
 COPY --from=BUILD_IMAGE /app/start.sh /app/start.sh
 
 WORKDIR /app
 COPY ./*.js ./package.json ./tsconfig.json ./yarn.lock ./default.yaml ./
 
-CMD ["/app/start.sh"]
+CMD [".docker/scripts/start.sh"]
 

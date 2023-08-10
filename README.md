@@ -1,3 +1,5 @@
+[![push-docker-image](https://github.com/autifynetwork/Autify-Backend/actions/workflows/push-docker-img.yml/badge.svg)](https://github.com/autifynetwork/Autify-Backend/actions/workflows/push-docker-img.yml)
+ 
  ## Autify Backend
 
  ### Autify Network Backend Features

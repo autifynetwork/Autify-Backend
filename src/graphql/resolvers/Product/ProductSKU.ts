@@ -79,7 +79,10 @@ export class ProductSKUResolver {
     // get all product sku
     @Query(() => [ProductSKUObject])
     async getAllProductSKU(): Promise<ProductSKU[]> {
-        return prisma.productSKU.findMany()
+        const productSku = await prisma.productSKU.findMany({
+            include: { SKUCategory: true }
+        })
+        return productSku
     }
 
     //find product sku by id

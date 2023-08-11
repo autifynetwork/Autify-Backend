@@ -29,8 +29,8 @@ services:
   app:
     image: autifynetwork/app
     container_name: app
-    environment:
-      DATABASE_URL: ${DATABASE_URL}
+    env_file:
+    - .env
     networks:
       - intranet
 

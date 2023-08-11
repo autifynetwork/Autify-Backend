@@ -15,6 +15,7 @@ import { PermissionStatusResolver } from '@graphql/resolvers/Permission/Status'
 import { PermissionReadResolver } from '@graphql/resolvers/Permission/Read'
 import { VendorResolver } from '@graphql/resolvers/Entity/Vendor'
 import { RoleResolver } from '@graphql/resolvers/Permission/Role'
+import { BomResolver } from '@graphql/resolvers/OrderMgmt/Bom'
 
 const getSchema = async () => {
     const schema = await buildSchema({
@@ -30,7 +31,8 @@ const getSchema = async () => {
             PermissionStatusResolver,
             PermissionReadResolver,
             VendorResolver,
-            RoleResolver
+            RoleResolver,
+            BomResolver
         ]
     })
     return schema

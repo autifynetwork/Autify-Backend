@@ -29,7 +29,6 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: .
           push: true
           tags: autifynetwork/app:${{ github.sha }}
           build-args: DATABASE_URL=${{ secrets.DATABASE_URL }} 

@@ -14,17 +14,6 @@ services:
       POSTGRES_DB: autifynetwork
     networks:
       - intranet
-  
-  nginx:
-    image: nginx
-    ports:
-      - "80:80"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    volumes:
-      - ./nginx:/etc/nginx/conf.d
-    networks:
-      - intranet
 
   app:
     image: autifynetwork/app

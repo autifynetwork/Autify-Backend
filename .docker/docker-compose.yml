@@ -31,6 +31,10 @@ services:
     container_name: app
     environment:
       DATABASE_URL: postgresql://username:password@db:5432/autifynetwork
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
     networks:
       - intranet
 

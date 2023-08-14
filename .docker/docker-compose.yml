@@ -30,7 +30,7 @@ services:
     image: autifynetwork/app
     container_name: app
     environment:
-      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_URL: postgresql://username:password@db:5432/autifynetwork
     networks:
       - intranet
 

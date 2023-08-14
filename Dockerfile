@@ -28,10 +28,5 @@ COPY --from=BUILD_IMAGE /app/.docker/scripts /app/.docker/scripts
 # Copy remaining files
 COPY ./*.js ./package.json ./tsconfig.json ./yarn.lock ./default.yaml ./
 
-# Set the DATABASE_URL environment variable
-ENV DATABASE_URL=$DATABASE_URL
-
-WORKDIR /app
-
 # Start the application
 CMD [".docker/scripts/start.sh"]

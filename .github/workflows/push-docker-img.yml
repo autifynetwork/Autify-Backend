@@ -26,11 +26,16 @@ jobs:
           aws-region: ap-south-1
       - name: Load secrets and save it in the environment
         run: aws secretsmanager get-secret-value --secret-id autback --query SecretString --output text | jq -r 'to_entries|map("\(.key)=\(.value)")|.[]' >> .env
+      - name: Create .env file and set build context
+        run: |
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > .env
+        env:
+          DOCKER_BUILD_CONTEXT: . 
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
           push: true
           tags: autifynetwork/app:${{ github.sha }}
-          secrets: |
-            "DATABASE_URL=${{ secrets.DATABASE_URL }}"
+          build-args: DATABASE_URL=${{ secrets.DATABASE_URL }}
+
 

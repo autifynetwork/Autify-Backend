@@ -4,6 +4,10 @@
 FROM node:18 AS BUILD_IMAGE
 WORKDIR /app
 
+# Define a build argument for DATABASE_URL
+ARG DATABASE_URL
+ENV DATABASE_URL=$DATABASE_URL
+
 # Install dependencies
 COPY . .
 RUN yarn install --frozen-lockfile

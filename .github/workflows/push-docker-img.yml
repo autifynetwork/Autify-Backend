@@ -36,6 +36,6 @@ jobs:
         with:
           push: true
           tags: autifynetwork/app:${{ github.sha }}
-          build-args: DATABASE_URL=${{ secrets.DATABASE_URL }}
-
+          build-args: |
+            DATABASE_URL=${{ secrets.DATABASE_URL }}
 

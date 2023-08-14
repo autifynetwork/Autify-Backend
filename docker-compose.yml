@@ -3,44 +3,29 @@ version: '3.9'
 services:
   db:
     image: postgres
-    container_name: postgres
-    restart: always
+    container_name: db
+    volumes:
+      - "db-data:/var/lib/postgresql/data"
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: diameter
-      POSTGRES_PASSWORD: span
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
       POSTGRES_DB: autifynetwork
-    volumes:
-      - db_data:/var/lib/postgresql/data
-  prisma:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    ports:
-      - "5555:5555"
-    depends_on:
-      - db
-    volumes:
-      - .:/app
-      - /app/node_modules
-    env_file:
-      - .env
-    command: npx prisma studio
-    links:
-      - db
+    networks:
+      - intranet
+  
   app:
     build:
       context: .
-      dockerfile: Dockerfile.dev
-    ports:
-      - "4000:4000"
-    depends_on:
-      - db
-    volumes:
-      - .:/app
-      - /app/node_modules
-    command: >
-        sh -c "npx prisma migrate dev --name init && yarn dev"
+    container_name: app
+    environment:
+      DATABASE_URL: postgresql://username:password@db:5432/autifynetwork
+    networks:
+      - intranet
+
 volumes:
-  db_data:
+  db-data:
+
+networks:
+  intranet:

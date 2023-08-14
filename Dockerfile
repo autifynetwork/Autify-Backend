@@ -1,8 +1,5 @@
 # Dockerfile
 
-# Set the build argument for DATABASE_URL
-ARG DATABASE_URL
-
 # Build Stage
 FROM node:18 AS BUILD_IMAGE
 WORKDIR /app
@@ -25,7 +22,8 @@ COPY --from=BUILD_IMAGE /app/node_modules /app/node_modules
 COPY --from=BUILD_IMAGE /app/prisma /app/prisma
 COPY --from=BUILD_IMAGE /app/.docker/scripts /app/.docker/scripts
 
-# Copy remaining files
+
+WORKDIR /app
 COPY ./*.js ./package.json ./tsconfig.json ./yarn.lock ./default.yaml ./
 
 # Start the application

@@ -4,7 +4,7 @@ import { CategoryObject } from '@graphql/types/Category'
 @ObjectType()
 export class ProductAttributeInput {
     @Field(() => ID)
-    ID: string
+    id: string
 
     @Field(() => String)
     attributeName: string
@@ -19,7 +19,7 @@ export class ProductAttributeInput {
 @ObjectType()
 export class ProductAttributeObject {
     @Field(() => ID)
-    ID: string
+    id: string
 
     @Field(() => String)
     attributeName: string

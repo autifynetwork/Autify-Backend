@@ -1,4 +1,4 @@
-import { Arg, Mutation, Resolver } from 'type-graphql'
+import { Arg, Mutation, Query, Resolver } from 'type-graphql'
 
 import { ProfileInput, ProfileObject } from '@graphql/types/Profile'
 import { Profile } from '@prisma/client'
@@ -54,5 +54,19 @@ export class ProfileResolver {
             }
         })
         return profile
+    }
+
+    //return profile using email
+    @Query(() => ProfileObject)
+    async getProfileEmail(@Arg('email') email: string) {
+        const profileEmail = await prisma.profile.findFirst({
+            where: { email: email }
+        })
+
+        if (!profileEmail) {
+            throw new Error(`product not found`)
+        } else {
+            return profileEmail
+        }
     }
 }
